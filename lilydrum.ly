@@ -1,10 +1,10 @@
 %{
 	LilyPond file definitions for Highland snare drum scores.
 	
-	Author : Simon Froger
-	
-	Please save the following definitions as scottish-drums.ily and add this line to your score :
-	\include "[path]/scottish-drums.ily"
+	This file was first created by Simon Froger.
+
+	Include by using :
+	\include "[path]/lilydrum.ly"
 	
 	Music has to be put into :
 	\new DrumStaff {
@@ -19,29 +19,31 @@
 % Note names defs : "d" for the right hand and "g" for the left hand
 drumPitchNames =
 #(append '(
-	(d . main-droite)
-	(g . main-gauche)
+	(d . right-hand)
+	(g . left-hand)
 	)
   drumPitchNames
 )
 
 % position according to the line : right hand up and left hand down
-#(define mysnaredrums '(
-	(main-droite	default	#f	1)
-	(main-gauche	default	#f	-1))
+#(define pipebandsnaredrums '(
+	(right-hand	default	#f	1)
+	(left-hand	default	#f	-1))
 )
 
+% Layout tweaks for good defaults
 \layout {
 	% no indent
 	indent = 0
 	% rolls number : markups should be preceeded by
 	\textLengthOn
+	
 	% dynamics up
 	\dynamicUp
-	\set DrumStaff.drumStyleTable = #(alist->hash-table mysnaredrums)
+	\set DrumStaff.drumStyleTable = #(alist->hash-table pipebandsnaredrums)
 	\context {
 		\DrumStaff
-		% one line par staff
+		% one line per staff
 		\override StaffSymbol.line-positions = #'(0)
 		% bar line length
 		\override BarLine.bar-extent = #'(-2 . 2)
@@ -51,7 +53,7 @@ drumPitchNames =
 		\override Stem.stemlet-length = #1.5 	 % short stem length 
 		% beam at same height
 		\override Beam.positions = #'(-5.5 . -5.5)
-		% slurs bellow rolls number 
+		% slurs below rolls number 
 		\override TextScript.outside-staff-priority = ##f
 		\override TextScript.side-axis = #0
 		\override TextScript.staff-padding = #3
@@ -108,7 +110,7 @@ dynLine = #(define-music-function
 
 % grace notes
 startGraceMusic = {
-	\stemUp											\tiny
+	\stemUp \tiny
 	\override Flag.stroke-style = #"grace"		
 	\once \override Beam.positions = #'(3 . 3)	
 	\once \override DrumStaff.Stem.length = #7	
@@ -120,14 +122,20 @@ stopGraceMusic =  {
 	\stemNeutral
 }
 
-% FLAMS & DRAGS :
+% Flams 
 flamd = \drummode { \grace { g8 } }			% right Flam 
 flamddr = \drummode { \grace { g8\startGroup } }	% with start repeat  
 flamg = \drummode { \grace { d8 } }			% left Flam 
 flamgdr = \drummode { \grace { d8\startGroup } }	% with start repeat  
+
+% Drags
 dragd = \drummode { \grace{ g16[ g] }}			% right Drag 
 dragddr = \drummode { \grace{ g16[\startGroup g] }} 	% with start repeat
 dragg = \drummode { \grace{ d16[ d] }}			% left Drag
 draggdr = \drummode { \grace{ d16[\startGroup d] }} 	% with start repeat
 
-% ====== END OF INCLUDED FILE =======================
+% Ruff
+ruffg = \drummode { \grace{ g16[ d g] }}		% left Ruff
+ruffgdr = \drummode { \grace{ g16[\startGroup d g] }}	% with start repeat
+ruffd = \drummode { \grace{ d16[ g d] }}		% right Ruff
+ruffd = \drummode { \grace{ d16[\startGroup g d] }}	% with start repeat
