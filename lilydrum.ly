@@ -120,11 +120,11 @@ stopGraceMusic =  {
 	\stemNeutral
 }
 
-% FLAS & DRAGS :
-flad = \drummode { \grace { g8 } }			% right Fla 
-fladdr = \drummode { \grace { g8\startGroup } }		% with start repeat  
-flag = \drummode { \grace { d8 } }			% left Fla 
-flagdr = \drummode { \grace { d8\startGroup } }		% with start repeat  
+% FLAMS & DRAGS :
+flamd = \drummode { \grace { g8 } }			% right Flam 
+flamddr = \drummode { \grace { g8\startGroup } }	% with start repeat  
+flamg = \drummode { \grace { d8 } }			% left Flam 
+flamgdr = \drummode { \grace { d8\startGroup } }	% with start repeat  
 dragd = \drummode { \grace{ g16[ g] }}			% right Drag 
 dragddr = \drummode { \grace{ g16[\startGroup g] }} 	% with start repeat
 dragg = \drummode { \grace{ d16[ d] }}			% left Drag
