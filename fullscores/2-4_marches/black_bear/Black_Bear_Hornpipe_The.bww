@@ -1,0 +1,71 @@
+Bagpipe Reader:1.0
+
+MIDINoteMappings,(54,56,58,59,61,63,64,66,68,56,58,60,61,63,65,66,68,70,55,57,59,60,62,64,65,67,69)
+
+FrequencyMappings,(370,415,466,494,554,622,659,740,831,415,466,523,554,622,699,740,831,932,392,440,494,523,587,659,699,784,880)
+
+InstrumentMappings,(71,71,45,33,1000,60,70)
+
+GracenoteDurations,(20,40,30,50,100,200,800,1200,250,250,250,500,200)
+
+FontSizes,(90,100,75,80,250)
+
+TuneFormat,(1,0,M,L,500,500,500,500,L,1,0)
+
+
+
+"The Black Bear Hornpipe",(T,L,0,0,Times New Roman,16,700,0,0,18,0,0,0)
+
+"March",(Y,C,0,0,Times New Roman,14,400,0,0,18,0,0,0)
+
+"Trad.",(M,R,0,0,Times New Roman,10,400,0,0,18,0,0,0)
+
+"P.M. FrankJan de Boone-The Seaforth Highlanders of Holland",(F,R,0,0,Times New Roman,10,400,0,0,18,0,0,0)
+"B 3",(F,C,0,0,Times New Roman,10,400,0,0,18,0,0,0)
+"2001",(F,L,0,0,Times New Roman,10,400,0,0,18,0,0,0)
+TuneTempo,84
+
+
+& sharpf sharpc 2_4 I!'' 	gg LAr_8 'la Bl_16 	
+! 		thrd Dr_8 lgstd Dl_8 	gg Fr_16 'f Dl_32 HAr_16 'ha Fl_32
+! 		thrd Dr_8 lgstd Dl_8 	gg Fr_16 'f Dl_32 HAr_16 'ha Fl_32
+! 		dbe Er_8 gg Bl_8 		grp Br_8 gg Er_16 Dl_16 	
+! 		gg Cr_32 Dl_16 'd gg Br_32 dg Cl_16 'c		gg LAr_16 'la Bl_32 	gg Cr_32 dg LAl_16 'la
+
+!t
+
+& sharpf sharpc  	thrd Dr_8 lgstd Dl_8 		gg Fr_16 'f Dl_32 HAr_16 'ha Fl_32
+!  	thrd Dr_8 lgstd Dl_8 		gg Fr_16 'f Dl_32 HAr_16 'ha Fl_32
+! 	dbe Er_8 grp El_8 		gg Er_16 'e HGl_32	 tg Fr_32 El_16 'e
+! 	thrd Dr_8 gg Fl_8 		thrd D_8 		''!I
+
+
+"part 2"
+
+& sharpf sharpc   space	 E_8 
+! 		gg LAr_16 'la dg LAl_32 eg LAl_16 dg Bl_16  	thrd Dr_8 gg Dr_16  El_16
+!		dbhg HGr_8 tg  Fr_16  El_16 				gg Fr_32 HAr_16 'ha Fl_16 'f Dl_32
+! 		gg LAr_16 'la dg LAl_32 eg LAl_16 dg Bl_16  	thrd Dr_8 gg Dr_16  El_16
+!		dbhg HGr_8 tg  Fr_16  El_16 				gg Fr_32 HAr_16 'ha Fl_16 'f Dl_32
+!t
+
+& sharpf sharpc 	
+	HAr_8  LAr_16 dbla LAl_16					gg Cr_8 dg LAr_16 dbla  LAl_16 
+!	gg Dr_8 Br_16 dbb Bl_16						gg Er_8 Cr_16 dbc Cl_16
+! 	gg Dr_32 Fl_16 'f gg Dr_32  Fl_16 'f		 		Er_16 'e HGl_32 	 tg Fr_32 HGl_16 'hg
+! 	HAr_8 grp HAl_8 							strhg HAr_16 'ha HGl_32 tg Fl_16 'f El_16
+
+!I
+
+& sharpf sharpc 		
+ 		thrd Dr_8 lgstd Dl_8 	gg Fr_16 'f Dl_32 HAr_16 'ha Fl_32
+! 		thrd Dr_8 lgstd Dl_8 	gg Fr_16 'f Dl_32 HAr_16 'ha Fl_32
+! 		dbe Er_8 gg Bl_8 		grp Br_8 gg Er_16 Dl_16 	
+! 		gg Cr_32 Dl_16 'd gg Br_32 dg Cl_16 'c		gg LAr_16 'la Bl_32 	gg Cr_32 dg LAl_16 'la
+
+!t
+
+& sharpf sharpc  	thrd Dr_8 lgstd Dl_8 		gg Fr_16 'f Dl_32 HAr_16 'ha Fl_32
+!  	thrd Dr_8 lgstd Dl_8 		gg Fr_16 'f Dl_32 HAr_16 'ha Fl_32
+! 	dbe Er_8 grp El_8 		gg Er_16 'e HGl_32	 tg Fr_32 El_16 'e
+! 	thrd Dr_8 gg Fl_8 		thrd D_8 		!I
