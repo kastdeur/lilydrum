@@ -1,0 +1,6 @@
+*.ps
+*.pdf
+*.png
+*.log
+bwwtolily.py
+_output/
