@@ -1,0 +1,15 @@
+TODO
+ * flam function : detect whether left flam or right flam. This depends on the note, whether it is right or left respectively
+ * show 8th and 16th beats in beaming, currently only 8ths
+ * include EUSPBA flourishing symbols, maybe a sprite file ?!?
+	* spanners (traditional and regimental spanners)
+	* symbols
+ * Very special beats (backsticking, crosssticking and the like..)
+ * Macros for tutti's (unisons), "Part 2 of $n",
+
+ * Find a nice filing system for easy saving, editing, generation of the scores
+ *** script to easily generate the scores
+	 should be able to generate single instrument scores aswell as full drumscores,
+	 and possibly fullscores (with the pipetune)
+	 from referenced files
+ *** templates

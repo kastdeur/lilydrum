@@ -2,5 +2,6 @@
 *.pdf
 *.png
 *.log
+*tmp*
 bwwtolily.py
 _output/

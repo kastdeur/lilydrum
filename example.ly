@@ -1,5 +1,6 @@
+\version "2.18.2"
 % include the lilydrum file
-include lilydrum.ly
+\include "lilydrum.ly"
 
 % Now a tiny example :
 \score {
@@ -10,7 +11,7 @@ include lilydrum.ly
 			\repeat volta 2 {
 				g8.[) g16 \dragd d8] d8.[ d16 \dragg g8] |
 				g8.[ \dragd d16 d8] d8.[ d16 \dragg g8] |
-				\fladdr d8. d16 g8 d4.:32(_"13" |
+				\flamddr d8. d16 g8 d4.:32(_"13" |
 				d8.) g16 d8 \flamg g4 d8:32(_"7" \fr |
 				\break
 				g8.[) g16 \dragd d8] d8.[ d16 \dragg g8] |
