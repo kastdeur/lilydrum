@@ -15,17 +15,17 @@
 		\drummode {
 			\repeat volta 2{
 				\partial 8 d8:32( |
-				g8) \tuplet 3/2 { d16 g d } 	\flamg g16. d32-> g16. g32 |
-				\flamd d8 d8:32(	g8:32)(-> \tuplet 3/2 { d16) g d } |
+				g8) \tuplet 3/2 { d16 g d } 	\flam g16. d32-> g16. g32 |
+				\flam d8 d8:32(	g8:32)(-> \tuplet 3/2 { d16) g d } |
 
-				\flamg g8[ \dragd d16. d32]->		g16.[ \dragd d32 d16. g32] |
+				\flam g8[ \drag d16. d32]->		g16.[ \drag d32 d16. g32] |
 				d4:32(		d8) d8:32( |
 
-				g8) \tuplet 3/2 { d16 g d } 	\flamg g16. d32-> g16. g32 |
-				\flamd d8 d8:32(	g8:32)(-> \tuplet 3/2 { d16) g d } |
+				g8) \tuplet 3/2 { d16 g d } 	\flam g16. d32-> g16. g32 |
+				\flam d8 d8:32(	g8:32)(-> \tuplet 3/2 { d16) g d } |
 
 
-				\flamg g8-> \tuplet 3/2 { \flamd d16 g d-> }		g16. g32 \flamd d8 |
+				\flam g8-> \tuplet 3/2 { \flam d16 g d-> }		g16. g32 \flam d8 |
 				d4:32(		d8)
 			}
 			\break
@@ -40,7 +40,7 @@
 				d8:32( \tuplet 3/2 { g16) d g-> } 	d8:32(-> g8:32)(-> |
 				\tuplet 3/2 { d16) g d->} g16. g32	d8:32(-> \tuplet 3/2 { g16) d g } |
 
-				\flamg g8-> \tuplet 3/2 { \flamd d16 g d-> }		g16. g32 \flamd d8 |
+				\flam g8-> \tuplet 3/2 { \flam d16 g d-> }		g16. g32 \flam d8 |
 				d4:32(		d8)
 			}
 		}

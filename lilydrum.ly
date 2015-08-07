@@ -18,6 +18,7 @@
 	}
 
 %}
+#(ly:set-option 'point-and-click #f)
 
 % Note name defs :
 %	"d" for the right hand ("droite") and
@@ -128,7 +129,7 @@ eighthBeaming = {
 }
 sixteenthBeaming = {
   \set Score.baseMoment = #(ly:make-moment 1 16)
-  \set Score.beatStructure = #'( 2 2 )
+  \set Score.beatStructure = #'( 4 4 4 4 )
 }
 
 \layout{
@@ -144,6 +145,9 @@ sixteenthBeaming = {
 
 		% I like being able to identify the 8th notes
 		subdivideBeams = ##t
+		strictBeatBeaming = ##t
+
+		\override TupletBracket.bracket-visibility = ##f
 	}
 }
 
@@ -183,13 +187,18 @@ dynLine = #(define-music-function
 % 	Flams, Drags & the sort							%
 % =================================================	%
 drumgrace = #(define-music-function (parser location notes) (ly:music?) #{
+	% Set settings
 	\stemUp
+	\once \override Beam.positions = #'(1.8 . 1.8)
+	\once \override DrumStaff.Stem.length = #5
 	\override Flag.stroke-style = #"grace"
-	\once \override Beam.positions = #'(2 . 2)
-	\once \override DrumStaff.Stem.length = #6
-	\override Score.GraceSpacing #'spacing-increment = #0
+	\override Score.GraceSpacing #'spacing-increment = #1
 	\override Score.Stem #'beamlet-max-length-proportion = #'(0.5 . 0.5)
-	\tiny \grace $notes \normalsize
+
+	% Print notes
+	\grace $notes
+
+	% Revert back
 	\revert Score.Stem #'beamlet-default-length
 	\revert Flag.stroke-style
 	\stemNeutral
@@ -220,13 +229,47 @@ sruffgdr = \drummode { \drumgrace { g16[\startGroup d d] }}	% with start repeat
 sruffd = \drummode { \drumgrace { d16[ g g] }}		% right Swiss Ruff
 sruffddr = \drummode { \drumgrace { d16[\startGroup g g] }}	% with start repeat
 
-
+% Embellishment functions, automatic left or right
+% Flam
 flam = #(define-music-function (parser location note) (ly:music?) #{
 	% is note right-handed? then \flamd
 	% if left, then \flamg
+	#(if (string=? (symbol->string (ly:music-property note 'drum-type)) "left-hand")
+          #{ \flamg #}
+          #{ \flamd #})
+	% print the note, else it won't show up
+	$note
+#})
 
-	#(if #f \flamg ($\flamd)) % fix \flam{gd} return
+% Drag
+drag = #(define-music-function (parser location note) (ly:music?) #{
+	% is note right-handed? then \flamd
+	% if left, then \flamg
+	#(if (string=? (symbol->string (ly:music-property note 'drum-type)) "left-hand")
+          #{ \dragg #}
+          #{ \dragd #})
+	% print the note, else it won't show up
+	$note
+#})
 
+% Ruff
+ruff = #(define-music-function (parser location note) (ly:music?) #{
+	% is note right-handed? then \flamd
+	% if left, then \flamg
+	#(if (string=? (symbol->string (ly:music-property note 'drum-type)) "left-hand")
+          #{ \ruffg #}
+          #{ \ruffd #})
+	% print the note, else it won't show up
+	$note
+#})
+
+% Swiss Ruff
+sruff = #(define-music-function (parser location note) (ly:music?) #{
+	% is note right-handed? then \flamd
+	% if left, then \flamg
+	#(if (string=? (symbol->string (ly:music-property note 'drum-type)) "left-hand")
+          #{ \sruffg #}
+          #{ \sruffd #})
 	% print the note, else it won't show up
 	$note
 #})
