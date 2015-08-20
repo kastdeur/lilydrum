@@ -85,8 +85,6 @@ drumPitchNames =
 		% dynamics up
 		\dynamicUp
 
-
-
 		% slurs below rolls number
 		%\override TextScript.outside-staff-priority = ##f
 		%\override TextScript.side-axis = #0
@@ -103,10 +101,10 @@ drumPitchNames =
 		%\override StemTremolo.Y-offset = #-2.8
 
 		% repeat brackets
-		%\consists "Horizontal_bracket_engraver"
-		%\override HorizontalBracket.staff-padding = #6.5		% staff-padding
-		%\override HorizontalBracket.direction = #DOWN			% brackets under thr staff
-		%\override HorizontalBracket.bracket-flare = #'(0 . 0)	% vertical brackets
+		\consists "Horizontal_bracket_engraver"
+		\override HorizontalBracket.staff-padding = #3.5		% staff-padding
+		\override HorizontalBracket.direction = #UP			% brackets under thr staff
+		\override HorizontalBracket.bracket-flare = #'(0 . 0)	% vertical brackets
 
 	}
 	\context {
@@ -147,9 +145,42 @@ sixteenthBeaming = {
 		subdivideBeams = ##t
 		strictBeatBeaming = ##t
 
-		\override TupletBracket.bracket-visibility = ##f
+		\override TupletBracket.bracket-visibility = #'if-no-beams
 	}
 }
+
+% =================================================	%
+% 	Side Sticking (modifies note, or adds mark)		%
+% =================================================	%
+backstick	= #(define-music-function (parser location notes) (ly:music?)
+				#{
+					\temporary \override Staff.NoteHead.style = #'triangle
+					$notes
+					\revert Staff.NoteHead.style
+				#})
+crossstick	= #(define-music-function (parser location notes) (ly:music?)
+				#{
+					\temporary \override Staff.NoteHead.style = #'xcircle
+					$notes
+					\revert Staff.NoteHead.style
+				#})
+rimshot		= #(define-music-function (parser location notes) (ly:music?)
+				#{
+					$notes
+					\once \override Staff.NoteHead.style = #'cross
+					\once \hide Stem
+					d
+				#})
+
+% =================================================	%
+% 	Tenor Flourishing								%
+% =================================================	%
+flourish = #(define-music-function (parser location notes) (ly:music?)
+				#{
+					\temporary \override Staff.NoteHead.style = #'cross
+					$notes
+					\revert Staff.NoteHead.style
+				#})
 
 % =================================================	%
 % 	Functions										%
@@ -183,6 +214,13 @@ dynLine = #(define-music-function
 		\once \override TextSpanner.bound-details.right.text = \markup { \draw-line #'(0 . -1) }
 	#})
 
+tutti = #(define-event-function (parser location notes) (ly:music?) #{
+	\startGroup
+	% still to add: a little 'u'
+	$notes
+	\stopGroup
+	#})
+
 % =================================================	%
 % 	Flams, Drags & the sort							%
 % =================================================	%
@@ -206,30 +244,33 @@ drumgrace = #(define-music-function (parser location notes) (ly:music?) #{
 
 
 % Flams
-flamd = \drummode { \drumgrace { g8 } }			% right Flam, actually flam(left) note(right)
-flamddr = \drummode { \drumgrace { g8\startGroup } }	% with start repeat
-flamg = \drummode { \drumgrace { d8 } }			% left Flam
-flamgdr = \drummode { \drumgrace { d8\startGroup } }	% with start repeat
+flamd =   \drummode { \drumgrace { g8 } }					% Flam right
+flamg =   \drummode { \drumgrace { d8 } }					% Flam left
+flamddr = \drummode { \drumgrace { g8\startGroup } }		% Flam right with start repeat
+flamgdr = \drummode { \drumgrace { d8\startGroup } }		% Flam left	 with start repeat
 
 % Drags
-dragd = \drummode { \drumgrace { g16[ g] }}			% right Drag
-dragddr = \drummode { \drumgrace { g16[\startGroup g] }} 	% with start repeat
-dragg = \drummode { \drumgrace { d16[ d] }}			% left Drag
-draggdr = \drummode { \drumgrace { d16[\startGroup d] }} 	% with start repeat
+dragd =   \drummode { \drumgrace { g16[ g] }}				% Drag right
+dragg =   \drummode { \drumgrace { d16[ d] }}				% Drag left
+dragddr = \drummode { \drumgrace { g16[\startGroup g] }} 	% Drag right with start repeat
+draggdr = \drummode { \drumgrace { d16[\startGroup d] }} 	% Drag left  with start repeat
 
 % Ruff
-ruffg = \drummode { \drumgrace { g16[ d g] }}		% left Ruff
-ruffgdr = \drummode { \drumgrace { g16[\startGroup d g] }}	% with start repeat
-ruffd = \drummode { \drumgrace { d16[ g d] }}		% right Ruff
-ruffddr = \drummode { \drumgrace  { d16[\startGroup g d] }}	% with start repeat
+ruffg =   \drummode { \drumgrace { g16[ d g] }}				% Ruff right
+ruffd =   \drummode { \drumgrace { d16[ g d] }}				% Ruff left
+ruffgdr = \drummode { \drumgrace { g16[\startGroup d g] }}	% Ruff right with start repeat
+ruffddr = \drummode { \drumgrace  { d16[\startGroup g d] }}	% Ruff left  with start repeat
 
 % Swiss Ruff
-sruffg = \drummode { \drumgrace { g16[ d d] }}		% left Swiss Ruff
-sruffgdr = \drummode { \drumgrace { g16[\startGroup d d] }}	% with start repeat
-sruffd = \drummode { \drumgrace { d16[ g g] }}		% right Swiss Ruff
-sruffddr = \drummode { \drumgrace { d16[\startGroup g g] }}	% with start repeat
+sruffg =   \drummode { \drumgrace { g16[ d d] }}			% Swiss Ruff right
+sruffd =   \drummode { \drumgrace { d16[ g g] }}			% Swiss Ruff left
+sruffgdr = \drummode { \drumgrace { g16[\startGroup d d] }}	% Swiss Ruff right with start repeat
+sruffddr = \drummode { \drumgrace { d16[\startGroup g g] }}	% Swiss Ruff left  with start repeat
 
-% Embellishment functions, automatic left or right
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%	Embellishment functions, automatic left or right	%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Flam
 flam = #(define-music-function (parser location note) (ly:music?) #{
 	% is note right-handed? then \flamd

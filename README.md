@@ -7,3 +7,7 @@ There has been a lilypond include file earlier made by Simon Froger (which inclu
 This is meant to extend or translate some parts.
 
 The original file can still be found at http://lsr.di.unimi.it/LSR/Snippet?id=970
+
+
+Currently, the most advanced score is MacKenzie Highlanders in 2-4_marches/mackenzie_highlanders.side.ly
+This score is used for most of the layout.

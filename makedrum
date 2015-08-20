@@ -1,0 +1,174 @@
+#!/usr/bin/python3.4
+
+## Generate pdf form lilypond file
+## by using standard command
+##
+## Most of programming was done by Sven Axelsson, http://svenax.net/
+
+import codecs, os
+from argparse import ArgumentParser
+
+class MakeDrum:
+	LILYPOND = 'lilypond'
+	VERSION  = '0.7'
+	TMP_DIR  = './tmp'
+	TMP_PREFIX = 'tmp_'
+
+	def __init__(self):
+		# Gather options and create the template file
+
+		usage = __file__
+		parser = ArgumentParser(usage)
+
+		parser.add_argument('--version',
+			action='store_true', dest='show_version', default=False,
+			help='show makeDrum version and exit')
+		parser.add_argument('--lilyversion',
+			action='store_true', dest='show_lilyversion', default=False,
+			help='show Lilypond version and exit')
+
+		parser.add_argument('-p', '--paper-size',
+			dest='papersize', default='a4',
+			help='Paper size. Default: A4')
+		parser.add_argument('-o', '--orientation',
+			dest='orientation', default='landscape',
+			help='Paper orientation. Default: landscape')
+		parser.add_argument('-s', '--staff-size',
+			dest='staffsize', default='16',
+			help='Staff size. Default: 16pt.')
+		parser.add_argument('-f', '--format',
+			dest='format', default=None,
+			help='Use header format file "header_{format}". Default: "header_default"')
+		parser.add_argument('-w', '--view-spacing',
+			action='store_true', dest='view_spacing', default=False,
+			help='Turn on "Paper.annotatespacing".')
+
+		parser.add_argument('--no-log',
+			action='store_false', dest='log', default=True,
+			help='Do not generate log files.')
+		parser.add_argument('--no-cleanup',
+			action='store_false', dest='clean', default=True,
+			help='Leave all temporary files in place')
+		parser.add_argument('music_file',
+			default='', nargs='+',
+			help='file to process')
+		parser.add_argument('-@', '--list_file',
+			dest='list_file', default='',
+			help='list of files to process')
+
+		self.args = parser.parse_args()
+
+		if self.args.show_version:
+			print(__name__, ' ', self.VERSION)
+			return
+
+		if self.args.show_lilyversion:
+			print(os.system(self.LILYPOND+' --version'))
+			return
+
+		if self.args.view_spacing:
+			self.args.view_spacing = "##t"
+		else:
+			self.args.view_spacing = "##f"
+
+		# Input files
+		if self.args.list_file != '':
+			self.args.music_file.append(open(self.args.list_file, 'r').readlines())
+			close(self.args.list_file)
+
+		# Clean up of files
+		self.remove_tmp_dir = self.args.clean
+
+		if not os.path.exists(os.path.join(os.path.curdir, self.TMP_DIR)):
+			try: os.makedirs(os.path.join(os.path.curdir, self.TMP_DIR))
+			except:
+				print('Seems like no temporary directory can be created')
+				return
+
+
+		for file_path in self.args.music_file:
+			self.processit(self.TMP_DIR, file_path)
+
+		#if not
+		#os.rmdir(self.TMP_DIR)
+
+	def processit(self, tmp_dir, file):
+		if self.args.log:
+				logfile = os.path.join(self.TMP_DIR, file.strip('.ly').replace('/', '-')+'.log')
+				log = ' > '+logfile+' 2>&1'
+		else:
+			log = ''
+
+		if self.args.format is None:
+			if file.endswith(".book"):
+				header_format = "header_book"
+			else:
+				header_format = "header_default"
+
+		tmp_file = self.maketemplate(tmp_dir, file, header_format)
+
+		print ('Compiling ', file, end=' ', flush=True)
+
+		lilycmd = self.LILYPOND+' --pdf --output=./pdf/'+os.path.basename(tmp_file).strip(self.TMP_PREFIX).strip('ly')+' '+tmp_file+log
+
+		if os.system(lilycmd) != 0:
+			self.remove_tmp_dir = False
+			print ('[Error]')
+			print (' ! Did not compile, please see the log at ', logfile)
+		else :
+			print ('[OK]')
+			os.remove(logfile)
+			os.remove(tmp_file)
+
+
+	def maketemplate(self, tmp_dir, file, header_format):
+		# set up a tmp file with template and file combined
+		tmp_file = os.path.join(tmp_dir, self.TMP_PREFIX + file.replace('/', '-'))
+
+		out_file = codecs.open(tmp_file, 'w+', 'utf8')
+		out_file.write(u'\ufeff')
+
+		out_file.write(u"""
+% Generated from """+file+""" by """+__file__+"""
+
+\\version "2.18.0"
+
+#(ly:set-option 'point-and-click #f)
+
+#(set-global-staff-size """+self.args.staffsize+""")
+#(set-default-paper-size \""""+self.args.papersize+"""\" '"""+self.args.orientation+""")
+
+\\include "../"""+header_format+""".ily"
+\\include "lilydrum.ly"
+
+% Local tweaks
+\\paper {
+	ragged-bottom = ##t
+}
+\layout {
+	\context {
+		\Score
+		% We only permit explicit line breaks
+		\override NonMusicalPaperColumn #'line-break-permission = ##f
+	}
+}
+
+% The tune to generate.
+		""")
+
+		# Read lily file into tmp file
+		music = codecs.open(file, 'r', 'utf8').read()
+		if music.startswith(u'\ufeff'): music = music[1:]
+		music = music.split(u'\n')
+		printit = 1
+		for line in music:
+			if line.strip().startswith(u'\\include "lilydrum.ly"'): continue
+			if printit:
+				out_file.write(line.replace('\r', '')+'\n')
+		out_file.close()
+
+		# Return tmp_file_path
+		return tmp_file
+
+
+MakeDrum();
