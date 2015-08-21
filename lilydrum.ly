@@ -127,7 +127,7 @@ eighthBeaming = {
 }
 sixteenthBeaming = {
   \set Score.baseMoment = #(ly:make-moment 1 16)
-  \set Score.beatStructure = #'( 4 4 4 4 )
+  \set Score.beatStructure = #'( 4)
 }
 
 \layout{
@@ -178,6 +178,12 @@ rimshot		= #(define-music-function (parser location notes) (ly:music?)
 flourish = #(define-music-function (parser location notes) (ly:music?)
 				#{
 					\temporary \override Staff.NoteHead.style = #'cross
+					$notes
+					\revert Staff.NoteHead.style
+				#})
+splitTheFeather = #(define-music-function (parser location notes) (ly:music?)
+				#{
+					\temporary \override Staff.NoteHead.style = #'xcircle
 					$notes
 					\revert Staff.NoteHead.style
 				#})

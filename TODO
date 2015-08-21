@@ -4,12 +4,12 @@ TODO
  * Macro for "Part 2 of $n"
  * If 8/16/32/..th notes come before a flam, they have a flag instead of a beam (fixable by explicit beaming, but rather have a good autobeaming)
  * A tuplet beginning with a flam has a strange tuplet beam (slanted)
- * It's custormary to have 4 bars per line for portrait and 8 for landscape...
+ * It's customary to have 4 bars per line for portrait and 8 for landscape...
 
  * TEMPLATING
    Find a nice filing system for easy saving, editing, generation of the scores
    *** script to easily generate the scores
-	   should be able to generate single instrument scores aswell as full drumscores,
+	   should be able to generate single instrument scores aswell as full drumscores (side, tenor, bass),
 	   and possibly fullscores (with the pipetune)
 	   from referenced files
    *** templates
@@ -21,10 +21,10 @@ TODO
 	backstick			white triangle pointing down
 
 
- * FLOURISHING			short	note	above-note
-	regular flourish	\fl		cross
-	ups					\up				arrow-up
-	scoop				\scoop			arrow-right-(diag-up\diag-down)
-	split the feather	\stf			xcircle
-	cartwheel			\cart
-	(EUSPBA symbols)
+ * FLOURISHING			short	long			note	above-note
+	regular flourish	\fl		\flourish		cross
+	ups					\up								arrow-up
+	scoop				\scoop							arrow-right-(diag-up\diag-down) [propably start on beginning of note and filter out the last one]
+	split the feather	\stf	\splitTheFeather		xcircle
+	cartwheel			\cart	\cartwheel
+	(further EUSPBA symbols)
