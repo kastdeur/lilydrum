@@ -48,8 +48,8 @@ drumPitchNames =
 #(define pipeband-style '(
 	(right-hand	()	#f	1)
 	(left-hand	()	#f	-1)
-	(right-backstick cross	#f	1)
-	(left-backstick	cross	#f	-1)
+	(right-crossstick cross	#f	1)
+	(left-crossstick cross	#f	-1)
 	(right-backstick xcircle #f	1)
 	(left-backstick	xcircle	#f	-1)
 	)
@@ -120,14 +120,13 @@ drumPitchNames =
 % 	Define some tweaks for printing nicely			%
 % ===================================================	%\
 
-
 eighthBeaming = {
   \set Score.baseMoment = #(ly:make-moment 1 8)
   \set Score.beatStructure = #'( 2 )
 }
 sixteenthBeaming = {
   \set Score.baseMoment = #(ly:make-moment 1 16)
-  \set Score.beatStructure = #'( 4)
+  \set Score.beatStructure = #'( 4 )
 }
 
 \layout{
@@ -154,7 +153,7 @@ sixteenthBeaming = {
 % =================================================	%
 backstick	= #(define-music-function (parser location notes) (ly:music?)
 				#{
-					\temporary \override Staff.NoteHead.style = #'triangle
+					\temporary \override Staff.NoteHead.style = \
 					$notes
 					\revert Staff.NoteHead.style
 				#})
@@ -167,30 +166,44 @@ crossstick	= #(define-music-function (parser location notes) (ly:music?)
 rimshot		= #(define-music-function (parser location notes) (ly:music?)
 				#{
 					$notes
-					\once \override Staff.NoteHead.style = #'cross
-					\once \hide Stem
-					d
+
 				#})
 
 % =================================================	%
 % 	Tenor Flourishing								%
 % =================================================	%
+splitTheFeather = \markup{ \musicglyph #"noteheads.s2xcircle"}
+cartWheel = \markup { \musicglyph #"timesig.neomensural94" }
+up = \markup {
+	%	\combine
+			%\tiny \triangle ##t
+			\center-align \draw-line #'(0 . 2)
+		}
+
 flourish = #(define-music-function (parser location notes) (ly:music?)
 				#{
 					\temporary \override Staff.NoteHead.style = #'cross
 					$notes
 					\revert Staff.NoteHead.style
 				#})
-splitTheFeather = #(define-music-function (parser location notes) (ly:music?)
+scoop = #(define-music-function (parser location notes end) (ly:music? ly:music?)
 				#{
-					\temporary \override Staff.NoteHead.style = #'xcircle
-					$notes
-					\revert Staff.NoteHead.style
+					$notes ^\markup { \path
+					$end
 				#})
+
+% stf = \splitTheFeather
+% cart = \cartWheel
+% fl = \flourish
 
 % =================================================	%
 % 	Functions										%
 % =================================================	%
+
+% triplet
+triplet = #(define-music-function (parser location notes) (ly:music?)
+	#{ \tuplet 3/2 { $notes } #}
+	)
 
 % dynamics
 v = #(define-event-function (parser location) ()

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+MKDRUMCOMMAND="./makedrum"
+
+for d in *_marches strathspeys standards jigs airs hornpipes other
+do
+	$MKDRUMCOMMAND $d/*.ly
+done;

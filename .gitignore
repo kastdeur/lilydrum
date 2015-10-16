@@ -1,3 +1,4 @@
+.gitignore
 *.ps
 *.pdf
 *.png
@@ -6,4 +7,5 @@
 *.py
 _output/
 pdf/
+fullscores/
 fullscores/*

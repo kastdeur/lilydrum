@@ -13,10 +13,11 @@ class MakeDrum:
 	VERSION  = '0.7'
 	TMP_DIR  = './tmp'
 	TMP_PREFIX = 'tmp_'
+	MASTER_DIR = os.path.dirname(os.path.abspath(__file__))
+	RUN_DIR = os.path.abspath(os.curdir)
 
 	def __init__(self):
 		# Gather options and create the template file
-
 		usage = __file__
 		parser = ArgumentParser(usage)
 
@@ -27,6 +28,13 @@ class MakeDrum:
 			action='store_true', dest='show_lilyversion', default=False,
 			help='show Lilypond version and exit')
 
+		parser.add_argument('-x', '--drumfile',
+			dest='lilydrum', default='lilydrum.ly',
+			help='Use the specified file for drums')
+		parser.add_argument('-c', '--pipefile',
+			dest='lilypipe', default='bagpipe.ly',
+			help='Use the specified file for pipes')
+
 		parser.add_argument('-p', '--paper-size',
 			dest='papersize', default='a4',
 			help='Paper size. Default: A4')
@@ -34,7 +42,7 @@ class MakeDrum:
 			dest='orientation', default='landscape',
 			help='Paper orientation. Default: landscape')
 		parser.add_argument('-s', '--staff-size',
-			dest='staffsize', default='16',
+			dest='staffsize', default='20',
 			help='Staff size. Default: 16pt.')
 		parser.add_argument('-f', '--format',
 			dest='format', default=None,
@@ -49,6 +57,9 @@ class MakeDrum:
 		parser.add_argument('--no-cleanup',
 			action='store_false', dest='clean', default=True,
 			help='Leave all temporary files in place')
+		parser.add_argument('-d', '--out_dir',
+			dest='out_dir', default='pdf',
+			help='Output dir, for lilypond. If it doesn\'t exist, try to create it')
 		parser.add_argument('music_file',
 			default='', nargs='+',
 			help='file to process')
@@ -58,6 +69,7 @@ class MakeDrum:
 
 		self.args = parser.parse_args()
 
+		print(self.RUN_DIR)
 		if self.args.show_version:
 			print(__name__, ' ', self.VERSION)
 			return
@@ -84,17 +96,24 @@ class MakeDrum:
 			except:
 				print('Seems like no temporary directory can be created')
 				return
+		if not os.path.exists(os.path.join(os.path.curdir, self.args.out_dir)):
+			try: os.makedirs(os.path.join(os.path.curdir, self.args.out_dir))
+			except:
+				print('Seems like no output directory can be created')
+				return
 
-
+		os.chdir(self.MASTER_DIR)
 		for file_path in self.args.music_file:
-			self.processit(self.TMP_DIR, file_path)
+			self.processit(self.TMP_DIR, os.path.join(self.RUN_DIR, file_path))
 
 		#if not
 		#os.rmdir(self.TMP_DIR)
 
+		os.chdir(self.RUN_DIR)
+
 	def processit(self, tmp_dir, file):
 		if self.args.log:
-				logfile = os.path.join(self.TMP_DIR, file.strip('.ly').replace('/', '-')+'.log')
+				logfile = os.path.join(self.TMP_DIR, os.path.relpath(file).strip('.ly').replace('/', '-')+'.log')
 				log = ' > '+logfile+' 2>&1'
 		else:
 			log = ''
@@ -108,22 +127,51 @@ class MakeDrum:
 		tmp_file = self.maketemplate(tmp_dir, file, header_format)
 
 		print ('Compiling ', file, end=' ', flush=True)
+		if not self.args.log:
+			print()
 
-		lilycmd = self.LILYPOND+' --pdf --output=./pdf/'+os.path.basename(tmp_file).strip(self.TMP_PREFIX).strip('ly')+' '+tmp_file+log
+		lilyout = os.path.join(os.path.curdir, self.args.out_dir, os.path.basename(tmp_file).strip(self.TMP_PREFIX).strip('.ly'))
+		lilycmd = self.LILYPOND+' --pdf --output='+lilyout+' '+tmp_file+log
 
 		if os.system(lilycmd) != 0:
 			self.remove_tmp_dir = False
 			print ('[Error]')
-			print (' ! Did not compile, please see the log at ', logfile)
+			if self.args.log:
+				print (' ! Did not compile, please see the log at ', logfile)
 		else :
 			print ('[OK]')
-			os.remove(logfile)
-			os.remove(tmp_file)
+
+			if self.args.clean:
+				#remove files
+				if self.args.log:
+					os.remove(logfile)
+				os.remove(tmp_file)
 
 
 	def maketemplate(self, tmp_dir, file, header_format):
+		lily_includes = ''
+		include_drum_file = False
+		include_pipe_file = False
+		# find out whether drum, pipes, or full score
+		for ext in ['.full', '.side', '.tenor', '.bass', '.drum', '.snare']:
+			if ext in file:
+				include_drum_file = True
+
+		for ext in ['.full', '.pipes']:
+			if ext in file:
+				include_pipe_file = True
+
+		if include_drum_file:
+			lily_includes = lily_includes + u"""
+\\include \""""+self.args.lilydrum+"""\"
+"""
+		if include_pipe_file:
+			lily_includes = lily_includes + u"""
+\\include \""""+self.args.lilypipe+"""\"
+"""
+
 		# set up a tmp file with template and file combined
-		tmp_file = os.path.join(tmp_dir, self.TMP_PREFIX + file.replace('/', '-'))
+		tmp_file = os.path.join(tmp_dir, self.TMP_PREFIX + os.path.relpath(file).replace('/', '-'))
 
 		out_file = codecs.open(tmp_file, 'w+', 'utf8')
 		out_file.write(u'\ufeff')
@@ -139,8 +187,7 @@ class MakeDrum:
 #(set-default-paper-size \""""+self.args.papersize+"""\" '"""+self.args.orientation+""")
 
 \\include "../"""+header_format+""".ily"
-\\include "lilydrum.ly"
-
+"""+ lily_includes +"""
 % Local tweaks
 \\paper {
 	ragged-bottom = ##t

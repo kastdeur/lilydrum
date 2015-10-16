@@ -3,7 +3,7 @@
 \include "lilydrum.ly"
 
 \score {
-	\drums {
+	\drummode {
 		\numericTimeSignature
 		\time 4/4
 

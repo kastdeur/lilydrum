@@ -21,6 +21,7 @@
 			d8-> g  d g |
 			d4-> r  |
 			\bar "||"
+		\break
 			\flourish {
 				d4 d |
 				g4 g |
@@ -49,6 +50,7 @@
 			d8.-> g16 d8 g r g |
 			d4-> d8 g d4 |
 			\bar "||"
+		\break
 			\flourish{
 				d4-> d d |
 				g4-> g g |
@@ -73,12 +75,13 @@
 			d8-^ g d g d-> g d g |
 			d4-^ g d r |
 			\bar "||"
+		\break
 			\flourish {
 				d4 d g g |
 				d4 d g g |
 				d4 d g g |
 			}
-			\flourish d4 \flourish g \splitTheFeather d r |
+			\flourish d4 \flourish g d^\splitTheFeather r |
 		}
 	}
 
@@ -93,14 +96,15 @@
 
 		\repeat volta 2 {
 			\flourish d4. \flourish g |
-			\splitTheFeather d r |
+			d^\splitTheFeather r |
 			d g |
 			d8 r8 g8 d4. |
 			\flourish d4. \flourish g |
-			\splitTheFeather d r |
+			d^\splitTheFeather r |
 			d g |
 			d8 r8 g8 d4. |
 			\bar "||"
+		\break
 			\flourish {
 				d4. d |
 				g g |
@@ -110,7 +114,7 @@
 				g g |
 				d g |
 			}
-			\splitTheFeather d r |
+			d^\splitTheFeather r |
 
 		}
 	}
