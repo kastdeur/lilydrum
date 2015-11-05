@@ -29,7 +29,7 @@ class MakeDrum:
 			help='show Lilypond version and exit')
 
 		parser.add_argument('-x', '--drumfile',
-			dest='lilydrum', default='lilydrum.ly',
+			dest='lilydrum', default='lilydrum/lilydrum.ly',
 			help='Use the specified file for drums')
 		parser.add_argument('-c', '--pipefile',
 			dest='lilypipe', default='bagpipe.ly',
@@ -69,7 +69,6 @@ class MakeDrum:
 
 		self.args = parser.parse_args()
 
-		print(self.RUN_DIR)
 		if self.args.show_version:
 			print(__name__, ' ', self.VERSION)
 			return
@@ -113,7 +112,7 @@ class MakeDrum:
 
 	def processit(self, tmp_dir, file):
 		if self.args.log:
-				logfile = os.path.join(self.TMP_DIR, os.path.relpath(file).strip('.ly').replace('/', '-')+'.log')
+				logfile = os.path.join(self.TMP_DIR, os.path.relpath(file).replace(".ly", '').replace('/', '-')+'.log')
 				log = ' > '+logfile+' 2>&1'
 		else:
 			log = ''
@@ -130,7 +129,7 @@ class MakeDrum:
 		if not self.args.log:
 			print()
 
-		lilyout = os.path.join(os.path.curdir, self.args.out_dir, os.path.basename(tmp_file).strip(self.TMP_PREFIX).strip('.ly'))
+		lilyout = os.path.join(os.path.curdir, self.args.out_dir, os.path.basename(tmp_file).replace(self.TMP_PREFIX, '').replace(".ly", ''))
 		lilycmd = self.LILYPOND+' --pdf --output='+lilyout+' '+tmp_file+log
 
 		if os.system(lilycmd) != 0:
@@ -186,19 +185,9 @@ class MakeDrum:
 #(set-global-staff-size """+self.args.staffsize+""")
 #(set-default-paper-size \""""+self.args.papersize+"""\" '"""+self.args.orientation+""")
 
-\\include "../"""+header_format+""".ily"
 """+ lily_includes +"""
-% Local tweaks
-\\paper {
-	ragged-bottom = ##t
-}
-\layout {
-	\context {
-		\Score
-		% We only permit explicit line breaks
-		\override NonMusicalPaperColumn #'line-break-permission = ##f
-	}
-}
+
+\\include \""""+header_format+""".ily"
 
 % The tune to generate.
 		""")
@@ -209,7 +198,7 @@ class MakeDrum:
 		music = music.split(u'\n')
 		printit = 1
 		for line in music:
-			if line.strip().startswith(u'\\include "lilydrum.ly"'): continue
+			if line.startswith(u'\\include "lilydrum.ly"'): continue
 			if printit:
 				out_file.write(line.replace('\r', '')+'\n')
 		out_file.close()
