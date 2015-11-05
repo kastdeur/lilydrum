@@ -3,9 +3,11 @@
 \include "lilydrum.ly"
 
 \score {
-	\drums {
+	\new PipeBandDrumStaff {
 		\time 2/4
+		\eighthBeaming
 
+		\drummode {
 		% Part 1
 			\repeat volta 2 {
 				\partial 8 d8:32( |
@@ -40,6 +42,7 @@
 				\flamd d8 d8:32( g8) \bar "|."
 
 	}% End of drums %
+	}
 
 	\header {
 		title = "Black Bear"

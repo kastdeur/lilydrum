@@ -3,13 +3,14 @@
 \include "lilydrum.ly"
 
 \score {
-	\new DrumStaff {
+	\new PipeBandDrumStaff {
 		\time 5/4
-		\repeat volta 2 {
-			\repeat unfold 8 {	d4-^ g d-> g d | }
+		\drummode {
+			\repeat volta 2 {
+				\repeat unfold 8 {	d4-^ g d-> g d | }
+			}
 		}
 	}
-
 	\header {
 		title = "Cullen Bay"
 		meter = "March"

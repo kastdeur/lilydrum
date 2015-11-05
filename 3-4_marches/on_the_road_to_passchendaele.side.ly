@@ -3,8 +3,10 @@
 \include "lilydrum.ly"
 
 \score {
-    \drums {
+    \new PipeBandDrumStaff {
         \time 3/4
+
+		\drummode {
         	\repeat volta 2{
 				\flamd d8. g16		d4:32(		d8) d8:32( |
 				\tuplet 3/2 { g16) d g } \flamd d8		\flamd d4		d4:32( |
@@ -32,9 +34,8 @@
 				\flamd d8. g16		d4:32(		d8:32)(-> \tuplet 3/2 { g16) d g } |
 				d16. d32 \flamg g8		d4:32(		d4)
 			}
-		\break
-    }% End of drums %
-
+		}% End of drums %
+	}
 	\header {
 		title = "On the Road to Passchendaele"
 		meter = "Retreat"

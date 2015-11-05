@@ -1,12 +1,11 @@
 \score {
-	\new DrumStaff = "staff_side" {
-		\set DrumStaff.drumStyleTable = #(alist->hash-table pipeband-style)
+	\new PipeBandDrumStaff = "staff_side" {
 		\set Staff.instrumentName = #"Side"
 		\set Staff.shortInstrumentName = #"S.D."
 
 		\time 4/4
 		\eighthBeaming
-		%\markup{ 1st time through rolls, n+1th time: n drums play score}
+
 		\drummode {
 			\repeat unfold 3{
 				\flam  d8->) \! \triplet { d16 g d }	g8 \flam d->	r8 \flam d	r8 g |
@@ -28,5 +27,6 @@
 	\header {
 		title = "Abide with Me"
 		meter = "Hymn"
+		composer = "nth time through: n drums play score, others: rolls"
 	}
 }

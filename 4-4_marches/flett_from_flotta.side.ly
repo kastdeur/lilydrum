@@ -3,9 +3,9 @@
 \include "lilydrum.ly"
 
 \score {
-    \drums {
+    \new PipeBandDrumStaff {
         \time 4/4
-
+		\drummode {
 				\repeat volta 2{
 					\partial 8 d8:32( |
 					g8.) g16		d8:32( g8)		d4:32(		d8) d8:32( |
@@ -32,8 +32,8 @@
 					d4)->		d4:32(		d4)		r8
 				}
 
-    }% End of drums %
-
+		}% End of drums %
+	}
 	\header {
 		title = "Flett from Flotta"
 		meter = "March"

@@ -3,8 +3,10 @@
 \include "lilydrum.ly"
 
 \score {
-    \drums {
+    \new PipeBandDrumStaff {
         \time 6/8
+
+        \drummode {
         	\repeat volta 2{
 				\partial 8 g8 |
 				\flamd d4 d8:32(	g4) d8:32( |
@@ -76,8 +78,8 @@
 				\flamd d8. d16:64( d8)		d4.:32( |
 				d8.) g16 d8		\flamd d4
 			}
-		\break
-    }% End of drums %
+		}% End of drums %
+	}
 
 	\header {
 		title = "6/8 Standards"

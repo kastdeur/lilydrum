@@ -3,8 +3,11 @@
 \include "lilydrum.ly"
 
 \score {
-    \drums {
+    \new PipeBandDrumStaff {
+        \eighthBeaming
         \time 3/4
+
+		\drummode {
 			\repeat volta 2{
 				d4:32(->		d8) d8:32(->		d4) |
 				\flamd d8 d8:32(		\tuplet 3/2 { g16) d16 g16 } \flamd d16. g32		\tuplet 3/2 { d16 g16 d16 } \flamg g8 |
@@ -46,7 +49,8 @@
 				\flamd d8 d32 g d g		d8  d32 g d g		d16. g32-> d16. d32 |
 				\flamd d4		d4:32(		d4)
 			}
-   }% End of drums %
+		}% End of drums %
+	}
 
 	\header {
 		title = "3/4 Standards\n Setting 2"

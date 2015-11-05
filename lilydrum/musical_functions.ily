@@ -3,6 +3,15 @@
 % =================================================	%
 % Part of lilydrum
 
+eighthBeaming = {
+  \set baseMoment = #(ly:make-moment 1/8)
+  \set beatStructure = #'( 2 )
+}
+compoundEighthBeaming = {
+  \set baseMoment = #(ly:make-moment 1/8)
+  \set beatStructure = #'( 3 )
+}
+
 % triplet
 triplet = #(define-music-function (parser location notes) (ly:music?) #{ \tuplet 3/2 { $notes } #})
 

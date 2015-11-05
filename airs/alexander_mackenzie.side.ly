@@ -3,10 +3,11 @@
 \include "lilydrum.ly"
 
 \score {
-    \drums {
+    \new PipeBandDrumStaff {
         \time 6/8
 
-        % Part 1
+		\drummode {
+			% Part 1
             \repeat volta 2 {
 				\partial 8 d16. g32 |
 				d8:32( d8.)-> g16 d4:32( d8) |
@@ -25,7 +26,7 @@
 
 			\break
 
-        % Part 2 ( Part 2.2 = Part 1)
+			% Part 2 ( Part 2.2 = Part 1)
 				d8:32( |
 				g4) \flamd d16. g32 d8:32( g8) \flamd d8 |
 				d32-> g32 d32 g32 d32 g32 d32 g32-> d32 g32 d32 g32  d4-> d8:32( |
@@ -53,9 +54,8 @@
 				d8:32( g16.) d32-> g16. g32 d8:32( g16.) d32-> g16. g32 |
 				d4.:32( d4)
 				\bar "|."
-
-    }% End of drums %
-
+		}% End of drums %
+	}
 	\header {
 		title = "Alexander MacKenzie"
 		meter = "Slow March"

@@ -1,5 +1,5 @@
 \score {
-	\new DrumStaff = "staff_side" {
+	\new PipeBandDrumStaff = "staff_side" {
 		\set DrumStaff.drumStyleTable = #(alist->hash-table pipeband-style)
 		\set Staff.instrumentName = #"Side"
 		\set Staff.shortInstrumentName = #"S.D."
@@ -19,7 +19,7 @@
 				g8) \tuplet 3/2 { d16 g d }	\flam g16. d32-> g16. g32 |
 				d8-> g8:32(->	d8:32)(-> \tuplet 3/2 { g16) d g } |
 
-				d8-> \drag d16 d32-> g	d g \drag d16 d16. g32 |
+				d8[-> \drag d16 d32-> g]	d[ g \drag d16 d16. g32] |
 				d4:32(	d8)
 			}
 			\break
@@ -34,7 +34,7 @@
 			d8:32( \tuplet 3/2 { g16) d g-> }	d16.-> g32-> d32 g d g-> |
 			d8-> g8:32(->	d8:32)(-> \tuplet 3/2{ g16) d g } |
 
-			d8-> \drag d16 d32-> g	d g \drag d16 d16. g32 |
+			d8[-> \drag d16 d32-> g]	d[ g \drag d16 d16. g32] |
 			d4:32(	d8) g8
 
 			\bar "||"
@@ -49,7 +49,7 @@
 			d8)-> \! \tuplet 3/2 { g16 d g-> }	d8:32(-> \tuplet 3/2 { g16) d g-> }
 			d32 g d g-> d16.-> g32	d8:32(-> \tuplet 3/2 { g16) d g } |
 
-			d8-> \drag d16 d32-> g	d g \drag d16 d16. g32 |
+			d8[-> \drag d16 d32-> g]	d[ g \drag d16 d16. g32] |
 			d4:32( d4)
 			\bar ":|"
 		}

@@ -5,7 +5,7 @@
 yell = \markup { \bold \small HOY }
 
 \score {
-   \new DrumStaff = "staff_side" {
+   \new PipeBandDrumStaff = "staff_side" {
 		\set DrumStaff.drumStyleTable = #(alist->hash-table pipeband-style)
 		\set Staff.instrumentName = #"Side"
 		\set Staff.shortInstrumentName = #"S.D."

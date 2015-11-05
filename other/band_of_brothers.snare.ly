@@ -4,7 +4,7 @@
 #(set-global-staff-size 19)
 \layout {
 	indent = 0
-\set Score.markFormatter = #format-mark-box-alphabet
+	\set Score.markFormatter = #format-mark-box-alphabet
 	\context {
 		\DrumStaff
 		% one line per staff
@@ -113,15 +113,8 @@
 			\tuplet 3/2 { sn4 sn8} \tuplet 3/2 { r8 sn8 sn8 } \tuplet 3/2 { sn8. sn16 sn8 } \tuplet 3/2 { sn8 sn sn} |
 			sn8 r8 r4 sn4:32( sn4:32)( |
 			\tuplet 3/2 { sn8) sn8 r8 } \tuplet 3/2 { r8 sn8 sn8 }  sn8 r8 r4
-
-
-
-
 		}
 	}
-
-}
-
 	\header {
 		title = "Band of Brothers"
 		subtitle = "for the Edinburgh Military Tattoo 2005"
@@ -129,3 +122,7 @@
 		instrument = "Snare Drum"
 		meter = ""
 	}
+
+}
+
+

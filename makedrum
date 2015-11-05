@@ -181,13 +181,12 @@ class MakeDrum:
 \\version "2.18.0"
 
 #(ly:set-option 'point-and-click #f)
-
-#(set-global-staff-size """+self.args.staffsize+""")
-#(set-default-paper-size \""""+self.args.papersize+"""\" '"""+self.args.orientation+""")
-
 """+ lily_includes +"""
 
 \\include \""""+header_format+""".ily"
+
+#(set-global-staff-size """+self.args.staffsize+""")
+#(set-default-paper-size \""""+self.args.papersize+"""\" '"""+self.args.orientation+""")
 
 % The tune to generate.
 		""")

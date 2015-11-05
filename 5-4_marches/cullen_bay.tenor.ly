@@ -3,9 +3,10 @@
 \include "lilydrum.ly"
 
 \score {
-	\new DrumStaff {
+	\new PipeBandDrumStaff {
+		\time 5/4
+
 		\drummode {
-			\time 5/4
 			\repeat volta 4 {
 				d8-> g d g d-> g d4 d4 |
 				d8. g16 d8-> g8-> r8 g8 d4 d4 |
@@ -19,7 +20,6 @@
 			}
 		}
 	}
-
 	\header {
 		title = "Cullen Bay"
 		meter = "March"

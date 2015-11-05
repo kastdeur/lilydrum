@@ -1,11 +1,9 @@
 \score {
-	\new DrumStaff = "staff_bass"{
-		\set DrumStaff.drumStyleTable = #(alist->hash-table pipeband-style)
+	\new PipeBandDrumStaff = "staff_bass"{
 		\set Staff.instrumentName = #"Bass"
 		\set Staff.shortInstrumentName = #"B.D."
 
 		\time 4/4
-		\numericTimeSignature
 
 		\drummode {
 			\repeat volta 2 {
@@ -19,7 +17,7 @@
 				r8 d8 r8 g8 r8 d8 r8 g8 |
 				d4-> g4 d4 g4 |
 				d4-> g4 r8. g16 d4 |
-	
+
 			}
 		}
 	}

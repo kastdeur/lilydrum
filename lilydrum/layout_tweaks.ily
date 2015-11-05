@@ -32,8 +32,10 @@ drumPitchNames =
 		\DrumStaff
 		\name PipeBandDrumStaff
 		\alias DrumStaff
+
 		% one line per staff
 		\override StaffSymbol.line-positions = #'(0)
+
 		% bar line height
 		\override BarLine.bar-extent = #'(-2 . 2)
 

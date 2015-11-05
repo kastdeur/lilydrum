@@ -3,7 +3,7 @@
 \include "lilydrum.ly"
 
 \score {
-	\new DrumStaff {
+	\new PipeBandDrumStaff {
 		\drummode {
 			\time 6/8
 			\repeat volta 2 {

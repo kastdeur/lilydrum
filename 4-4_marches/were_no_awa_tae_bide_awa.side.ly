@@ -1,6 +1,5 @@
 \score {
-	\new DrumStaff = "staff_side" {
-		\set DrumStaff.drumStyleTable = #(alist->hash-table pipeband-style)
+	\new PipeBandDrumStaff = "staff_side" {
 		\set Staff.instrumentName = #"Side"
 		\set Staff.shortInstrumentName = #"S.D."
 

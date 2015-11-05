@@ -3,9 +3,10 @@
 \include "lilydrum.ly"
 
 \score {
-	\new DrumStaff {
+	\new PipeBandDrumStaff {
 		\drummode {
 			\time 4/4
+			\eighthBeaming
 
 			\repeat volta 2 {
 				\partial 16 g16 |

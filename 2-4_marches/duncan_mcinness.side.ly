@@ -3,8 +3,11 @@
 \include "lilydrum.ly"
 
 \score {
-    \drums {
+    \new PipeBandDrumStaff {
+        \eighthBeaming
         \time 2/4
+
+        \drummode {
         	\repeat volta 2{
 				\partial 8 d8:32( |
 				g8) d16. g32->		d16. d32 \flamg g8 |
@@ -76,7 +79,7 @@
 						\flamd d8 d8:32(	g4)
 						\bar "|."
 					}
-					\new DrumStaff{
+					\new PipeBandDrumStaff{
 						\once \omit Staff.TimeSignature
 						\flamd d16. g32 d16. d32	\flamg g16. d32 g16. g32 |
 						d16. \flamg g32 d16. d32	\flamg g8 d8:32( |
@@ -86,8 +89,8 @@
 					}
 				>>
 			}
-    }% End of drums %
-
+		}% End of drums %
+	}
 	\header {
 		title = "Duncan McInness"
 		meter = "Drum Salute in Quick Time"
