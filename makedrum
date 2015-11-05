@@ -29,7 +29,7 @@ class MakeDrum:
 			help='show Lilypond version and exit')
 
 		parser.add_argument('-x', '--drumfile',
-			dest='lilydrum', default='lilydrum/lilydrum.ly',
+			dest='lilydrum', default='lilydrum.ly',
 			help='Use the specified file for drums')
 		parser.add_argument('-c', '--pipefile',
 			dest='lilypipe', default='bagpipe.ly',
