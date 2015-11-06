@@ -122,6 +122,8 @@ class MakeDrum:
 				header_format = "header_book"
 			else:
 				header_format = "header_default"
+		else:
+			header_format = "header_" + self.args.format
 
 		tmp_file = self.maketemplate(tmp_dir, file, header_format)
 
@@ -198,6 +200,13 @@ class MakeDrum:
 		printit = 1
 		for line in music:
 			if line.startswith(u'\\include "lilydrum.ly"'): continue
+			if line.startswith(u'\\include'):
+				# Rewrite includes to absolute location of file
+				incline = line.replace('\\include', '').strip('"\' ')
+				print("include "+incline)
+				if not incline.startswith('\\'): #already absolute
+					incline = os.path.join(os.path.relpath(os.path.dirname(file)), incline)
+					line = "\\include \""+incline+"\""
 			if printit:
 				out_file.write(line.replace('\r', '')+'\n')
 		out_file.close()

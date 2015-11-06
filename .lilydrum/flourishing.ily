@@ -8,10 +8,7 @@ up = \markup {
 		%\center-column {
 			\combine
 				\draw-line #'(0 . -2) % draw stick
-				\combine % draw arrow
-					\draw-line #'(0.5 . -1)
-					\draw-line #'(-0.5 . -1)
-				%\arrow-head #Y #UP ##f
+				\arrow-head #Y #UP ##f
 		%}
 	}
 bfly = \markup {

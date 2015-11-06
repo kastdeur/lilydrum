@@ -10,7 +10,7 @@ today = #(strftime "%B %e, %Y" (localtime (current-time)))
     raggedbottom = ##t
     tagline = \markup {
         \line {
-            "Cpl Eric Teunis de Boone, Seaforths of Holland,"
+            "Cpl ET de Boone, Seaforths of Holland,"
             \concat { "(rev. " \today ")" }
         }
     }

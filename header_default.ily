@@ -23,7 +23,10 @@ today = #(strftime "%B %e, %Y" (localtime (current-time)))
                     \bold \fromproperty #'header:subtitle
                 }
                 \fromproperty #'header:meter
-                \line { \fromproperty #'header:composer " " \italic \fromproperty #'header:arranger }
+                \column {
+					\fromproperty #'header:instrument
+					\line { \fromproperty #'header:composer " " \italic \fromproperty #'header:arranger }
+				}
             }
             $(if (not (ly:get-option 'without-comment))
                  (markup #:justify-field 'header:comment)
