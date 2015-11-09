@@ -1,30 +1,15 @@
 TODO
- * show 8th and 16th beats in beaming, currently only 8ths
+ * show 8th and 16th beats in beaming, currently only 8ths:  d32[[ g] d[ g]] d32[[ g] d[ g]]
  * Macro for tutti's (unisons)
  * Macro for "Part 2 of $n"
  * If 8/16/32/..th notes come before a flam, they have a flag instead of a beam (fixable by explicit beaming, but rather have a good autobeaming)
- * A tuplet beginning with a flam has a strange tuplet beam (slanted)
+ * A tuplet beginning with a flam has a strange tuplet beam (slanted) (fixable by putting the flam outside of the tuplet .. )
  * It's customary to have 4 bars per line for portrait and 8 for landscape...
 
- * TEMPLATING
-   Find a nice filing system for easy saving, editing, generation of the scores
-   *** script to easily generate the scores
-	   should be able to generate single instrument scores aswell as full drumscores (side, tenor, bass),
-	   and possibly fullscores (with the pipetune)
-	   from referenced files
-   *** templates
-
- * SIDE sticking (lookup swiss notation)
-	regular				default
-	cross-stick			cross
+ * SIDE sticking
 	rimshot				default + cross
-	backstick			white triangle pointing down
-
 
  * FLOURISHING			short	long			note	above-note
-	regular flourish	\fl		\flourish		cross
 	ups					\up								arrow-up
 	scoop				\scoop							arrow-right-(diag-up\diag-down) [propably start on beginning of note and filter out the last one]
-	split the feather	\stf	\splitTheFeather		xcircle
-	cartwheel			\cart	\cartwheel				circle with dot
 	(further EUSPBA symbols)
