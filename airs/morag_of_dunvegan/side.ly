@@ -1,20 +1,19 @@
 \version "2.18.2"
 
-\include "morag_of_dunvegan.format.ly"
-\include "morag_of_dunvegan.notes.tenor.ly"
+\include "config.ily"
+\include "notes.side.ily"
 
 \score {
     \new PipeBandDrumStaff {
-        \time 6/8
+        \global
         <<
 			{\formatA \formatB}
-			{\tenorA \tenorB}
+			{\snareA \snareB}
 		>>
 	}
 	\header {
 		title = "Morag of Dunvegan"
 		meter = "Slow Air"
-		composer = ""
-		instrument = "Tenor"
+		instrument = "Side"
 	}
 }

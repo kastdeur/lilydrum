@@ -4,10 +4,10 @@
 drumgrace = #(define-music-function (parser location notes) (ly:music?) #{
 	% Set settings
 	\stemUp
-	\once \override Beam.positions = #'(1.8 . 1.8)
+	\once \override Beam.positions = #'(2 . 2)
 	\once \override DrumStaff.Stem.length = #5
 	\override Flag.stroke-style = #"grace"
-	\override Score.GraceSpacing #'spacing-increment = #1
+	\override Score.GraceSpacing #'spacing-increment = #0
 	\override Score.Stem #'beamlet-max-length-proportion = #'(0.5 . 0.5)
 
 	% Print notes

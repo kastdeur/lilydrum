@@ -7,7 +7,6 @@
 today = #(strftime "%B %e, %Y" (localtime (current-time)))
 
 \paper {
-    raggedbottom = ##t
     tagline = \markup {
         \line {
 			"Cpl ET de Boone, Seaforths of Holland,"

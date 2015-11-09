@@ -10,7 +10,7 @@ from argparse import ArgumentParser
 
 class MakeDrum:
 	LILYPOND = 'lilypond'
-	VERSION  = '0.7'
+	VERSION  = '0.9'
 	TMP_DIR  = './tmp'
 	TMP_PREFIX = 'tmp_'
 	MASTER_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -154,11 +154,11 @@ class MakeDrum:
 		include_drum_file = False
 		include_pipe_file = False
 		# find out whether drum, pipes, or full score
-		for ext in ['.full', '.side', '.tenor', '.bass', '.drum', '.snare']:
+		for ext in ['full', 'side', 'tenor', 'bass', 'drum', 'snare']:
 			if ext in file:
 				include_drum_file = True
 
-		for ext in ['.full', '.pipes']:
+		for ext in ['full', 'pipes']:
 			if ext in file:
 				include_pipe_file = True
 

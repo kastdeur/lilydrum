@@ -41,8 +41,8 @@ drumPitchNames =
 
 		% stems
 		\override Stem.direction = #DOWN		% stems down
-		\override Stem.length = #9				% unbeamed stems length
-		\override Stem.stemlet-length = #1.5	% short stem length
+		\override Stem.length = #8.5			% unbeamed stems length
+		\override Stem.stemlet-length = #1	% short stem length
 
 		% beams
 		\override Beam.beam-thickness = #0.4		% beam-thickness
@@ -59,7 +59,7 @@ drumPitchNames =
 		%\override TextScript.outside-staff-priority = ##f
 		%\override TextScript.side-axis = #0
 		%\override TextScript.staff-padding = #3
-		%\override TextScript.X-offset = #2 				% padding to stems
+		%\override TextScript.X-offset = #1				% padding to stems
 		%\override TextScript.extra-offset = #'(-0.3 . 0)
 
 		% tremolos (rolls)
