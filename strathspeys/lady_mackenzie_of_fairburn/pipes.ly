@@ -13,8 +13,9 @@
 		>>
 	}
 	\header {
-		title = "Lady MacKenzie of Fairburn"
-		meter = "Strathspey"
-		instrument = "Pipes"
+		title = \title
+		meter = \meter
+		instrument = \instrumentPipes
+		composer = \composerPipes
 	}
 }

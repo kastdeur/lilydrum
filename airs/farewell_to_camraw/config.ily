@@ -7,3 +7,7 @@ global = {
 
 %% Format
 formatA = { \repeat volta 2 { \repeat unfold 8 { s1 } } \break }
+
+%% Headers
+title = "Farewell to Camraw"
+meter = "Slow Air"

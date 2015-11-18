@@ -8,8 +8,8 @@
 \score {
 	\new StaffGroup <<
 		\new PipeBandDrumStaff = "side" {
-			\set PipeBandDrumStaff.instrumentName = #"Side "
-			\set PipeBandDrumStaff.shortInstrumentName = #"S.D. "
+			\set PipeBandDrumStaff.instrumentName = \markup{\instrumentSide}
+			\set PipeBandDrumStaff.shortInstrumentName = \markup{\shortInstrumentSide}
 
 			\global
 			<<
@@ -18,22 +18,34 @@
 			>>
 		}
 		\new PipeBandDrumStaff = "bass" {
-			\set PipeBandDrumStaff.instrumentName = #"Bass "
-			\set PipeBandDrumStaff.shortInstrumentName = #"B.D. "
+			\set PipeBandDrumStaff.instrumentName = \markup{ \instrumentBass }
+			\set PipeBandDrumStaff.shortInstrumentName = \markup{ \shortInstrumentBass}
 
 			\bassA
 			\bassB
 		}
 		\new PipeBandDrumStaff = "tenor" {
-			\set PipeBandDrumStaff.instrumentName = #"Tenor"
-			\set PipeBandDrumStaff.shortInstrumentName = #"T.D. "
+			\set PipeBandDrumStaff.instrumentName = \markup{ \instrumentTenor }
+			\set PipeBandDrumStaff.shortInstrumentName = \markup{ \shortInstrumentTenor }
 
 			\tenorA
 			\tenorB
 		}
 	>>
 	\header {
-		title = "Morag of Dunvegan"
-		meter = "Slow Air"
+		title = \title
+		meter = \meter
+		composer = \markup \tiny {
+			\column \right-align {
+				$(if (not (string=? "" composerSide))  #{ \markup {\line { \composerSide  ":" }} #} )
+				$(if (not (string=? "" composerTenor)) #{ \markup {\line { \composerTenor  ":" }} #} )
+				$(if (not (string=? "" composerBass))  #{ \markup {\line { \composerBass  ":" }} #} )
+			}
+			\column \right-align {
+				$(if (not (string=? "" composerSide))  #{ \markup {\line { \instrumentSide }}#} )
+				$(if (not (string=? "" composerTenor)) #{ \markup {\line { \instrumentTenor }}#} )
+				$(if (not (string=? "" composerBass))  #{ \markup {\line { \instrumentBass }}#} )
+			}
+		}
 	}
 }

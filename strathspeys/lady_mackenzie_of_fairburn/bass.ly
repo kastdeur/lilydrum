@@ -12,8 +12,9 @@
 		>>
 	}
 	\header {
-		title = "Lady MacKenzie of Fairburn"
-		meter = "Strathspey"
-		instrument = "Bass"
+		title = \title
+		meter = \meter
+		instrument = \instrumentBass
+		composer = \composerBass
 	}
 }

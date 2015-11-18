@@ -12,8 +12,9 @@
 		>>
 	}
 	\header {
-		title = "The Mist Covered Mountains"
-		meter = "Slow Air"
-		instrument = "Tenor"
+		title = \title
+		meter = \meter
+		instrument = \instrumentTenor
+		composer = \composerTenor
 	}
 }

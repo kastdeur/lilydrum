@@ -1,6 +1,7 @@
 % 4/4 Farewell to Camraw
 % Side
 \version "2.18.2"
+composerSide  = ""
 snareA = \drummode {
 	r1 |
 	r1 |

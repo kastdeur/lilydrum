@@ -5,5 +5,9 @@ global = {
 	}
 
 %% Format
-part = {\partial 16 s16 }
+part = { \partial 16 s16 }
 line = { \repeat unfold 4 { s1 | } }
+
+%% Headers
+title = "Lady MacKenzie of Fairburn"
+meter = "Strathspey"

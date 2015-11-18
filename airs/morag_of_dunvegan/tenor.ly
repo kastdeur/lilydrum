@@ -12,8 +12,9 @@
 		>>
 	}
 	\header {
-		title = "Morag of Dunvegan"
-		meter = "Slow Air"
-		instrument = "Tenor"
+		title = \title
+		meter = \meter
+		instrument = \instrumentTenor
+		composer = \composerTenor
 	}
 }

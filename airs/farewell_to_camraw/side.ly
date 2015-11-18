@@ -12,8 +12,9 @@
 		>>
 	}
 	\header {
-		title = "Farewell to Camraw"
-		meter = "Slow Air"
-		instrument = "Side"
+		title = \title
+		meter = \meter
+		instrument = \instrumentSide
+		composer = \composerSide
 	}
 }

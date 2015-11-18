@@ -7,13 +7,14 @@
     \new PipeBandDrumStaff {
 		\global
         <<
-			{\repeat volta 2 {\line} \break \line \break \line \bar "|." }
+			{\repeat volta 2 {\line} \break \line \bar "||" \break \line \bar "|." }
 			{\tenorA \tenorBA \tenorBB }
 		>>
 	}
 	\header {
-		title = "Molly Connell"
-		meter = "Strathspey"
-		instrument = "Tenor"
+		title = \title
+		meter = \meter
+		instrument = \instrumentTenor
+		composer = \composerTenor
 	}
 }

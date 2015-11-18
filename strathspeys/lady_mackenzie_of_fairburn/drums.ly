@@ -9,35 +9,43 @@
 	\new StaffGroup <<
 		\new PipeBandDrumStaff = "side" {
 			\global
-			\set PipeBandDrumStaff.instrumentName = #"Side "
-			\set PipeBandDrumStaff.shortInstrumentName = #"S.D. "
+			\set PipeBandDrumStaff.instrumentName = \markup{\instrumentSide}
+			\set PipeBandDrumStaff.shortInstrumentName = \markup{\shortInstrumentSide}
 
 			<<
 				{ \repeat volta 2 {\line } \break \part \line \break \line \bar "|."}
-				{ \snareA s16		\snareBA \snareBB }
+				{ \snareA	s16	\snareBA \snareBB }
 			>>
 		}
 		\new PipeBandDrumStaff = "bass" {
-			\set PipeBandDrumStaff.instrumentName = #"Bass "
-			\set PipeBandDrumStaff.shortInstrumentName = #"B.D. "
+			\set PipeBandDrumStaff.instrumentName = \markup{ \instrumentBass }
+			\set PipeBandDrumStaff.shortInstrumentName = \markup{ \shortInstrumentBass}
 
 			\bassA
-			s16
-			\bassBA
-			\bassBB
+			s16 \bassBA \bassBB
 		}
 		\new PipeBandDrumStaff = "tenor" {
-			\set PipeBandDrumStaff.instrumentName = #"Tenor"
-			\set PipeBandDrumStaff.shortInstrumentName = #"T.D. "
+			\set PipeBandDrumStaff.instrumentName = \markup{ \instrumentTenor }
+			\set PipeBandDrumStaff.shortInstrumentName = \markup{ \shortInstrumentTenor }
 
 			\tenorA
-			s16
-			\tenorBA
-			\tenorBB
+			s16 \tenorBA \tenorBB
 		}
 	>>
 	\header {
-		title = "Lady MacKenzie of Fairburn"
-		meter = "Strathspey"
+		title = \title
+		meter = \meter
+		composer = \markup {
+			\column \right-align {
+				$(if (not (string=? "" composerSide))  #{ \markup {\line { \composerSide  ":" }} #} )
+				$(if (not (string=? "" composerTenor)) #{ \markup {\line { \composerTenor  ":" }} #} )
+				$(if (not (string=? "" composerBass))  #{ \markup {\line { \composerBass  ":" }} #} )
+			}
+			\column \right-align {
+				$(if (not (string=? "" composerSide))  #{ \markup {\line { \instrumentSide }}#} )
+				$(if (not (string=? "" composerTenor)) #{ \markup {\line { \instrumentTenor }}#} )
+				$(if (not (string=? "" composerBass))  #{ \markup {\line { \instrumentBass }}#} )
+			}
+		}
 	}
 }

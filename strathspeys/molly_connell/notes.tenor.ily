@@ -1,6 +1,7 @@
 % 4/4 Molly Connell
 % Tenor
 \version "2.18.2"
+composerTenor = "S.J. de Boone / M. Jansen / N. Kuijkhoven / E.T. de Boone, 2014"
 tenorA = \drummode {
 	d4 g4 d8. g16 d4
 	d4 g4 r8. g16 d4 |

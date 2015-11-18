@@ -1,6 +1,7 @@
 % 4/4 Farewell to Camraw
 % Tenor
 \version "2.18.2"
+composerTenor = ""
 tenorA = \drummode {
 	R1
 	r8 g d16 g d g d8 g d16 g d g |

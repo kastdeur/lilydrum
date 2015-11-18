@@ -1,6 +1,7 @@
 % 4/4 Lady MacKenzie of Fairburn
 % Pipes
 \version "2.18.2"
+composerPipes = ""
 pipesA = {
 	d16 |
 	\dblc c8. e16
