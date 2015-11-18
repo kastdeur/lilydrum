@@ -1,6 +1,0 @@
-#!/bin/bash
-# Recursively remove all pdfs from this directory
-rm -v -R *.pdf
-rm -v -R /snare/*.pdf
-rm -v -R /tenor/*.pdf
-rm -v -R /bass/*.pdf

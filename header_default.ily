@@ -22,9 +22,13 @@ today = #(strftime "%B %e, %Y" (localtime (current-time)))
                     \bold \fromproperty #'header:subtitle
                 }
                 \fromproperty #'header:meter
-                \column {
+                \column \right-align {
 					\fromproperty #'header:instrument
-					\line { \fromproperty #'header:composer " " \italic \fromproperty #'header:arranger }
+					\line {
+						\fromproperty #'header:composer
+						$(if (and (ly:get-option 'header:composer) (ly:get-option 'header:arranger))
+							(markup " "))
+						\italic \fromproperty #'header:arranger }
 				}
             }
             $(if (not (ly:get-option 'without-comment))

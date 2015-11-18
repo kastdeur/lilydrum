@@ -4,5 +4,11 @@ MKDRUMCOMMAND="./makedrum"
 
 for d in *_marches strathspeys standards jigs airs hornpipes other
 do
-	$MKDRUMCOMMAND $d/*.ly
+	for f in $d/*.ly $d/*/*.ly
+	do
+		if [ ! -f $f ] ; then
+			continue
+		fi
+		$MKDRUMCOMMAND $f
+	done;
 done;

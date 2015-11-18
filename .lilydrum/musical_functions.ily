@@ -5,7 +5,7 @@
 
 eighthBeaming = {
   \set baseMoment = #(ly:make-moment 1/8)
-  \set beatStructure = #'( 2 )
+  \set beatStructure = #'( 2  2 )
 }
 compoundEighthBeaming = {
   \set baseMoment = #(ly:make-moment 1/8)

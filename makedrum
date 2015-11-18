@@ -203,7 +203,6 @@ class MakeDrum:
 			if line.startswith(u'\\include'):
 				# Rewrite includes to absolute location of file
 				incline = line.replace('\\include', '').strip('"\' ')
-				print("include "+incline)
 				if not incline.startswith('\\'): #already absolute
 					incline = os.path.join(os.path.relpath(os.path.dirname(file)), incline)
 					line = "\\include \""+incline+"\""

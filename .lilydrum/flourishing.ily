@@ -24,13 +24,20 @@ scoop = \markup {
 						 (lineto 7 1 )
 						 )
 			}
-
+scoopo = #(define-music-function (parser location beg notes) (ly:music? ly:music?)
+			#{
+			%Set spanner from first to last note
+				$beg
+				\startGroup
+				$notes
+				\stopGroup
+			#})
 flourish = #(define-music-function (parser location notes) (ly:music?)
-				#{
-					\temporary \override Staff.NoteHead.style = #'cross
-					$notes
-					\revert Staff.NoteHead.style
-				#})
+			#{
+				\temporary \override Staff.NoteHead.style = #'cross
+				$notes
+				\revert Staff.NoteHead.style
+			#})
 sdcoop = #(define-music-function (parser location notes end) (ly:music? ly:music?)
 				#{
 					$notes
