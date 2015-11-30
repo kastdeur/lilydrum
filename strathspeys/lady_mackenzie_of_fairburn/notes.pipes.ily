@@ -1,7 +1,7 @@
 % 4/4 Lady MacKenzie of Fairburn
 % Pipes
 \version "2.18.2"
-composerPipes = ""
+composerPipes = "J. Wark, arr. R. Stanley"
 pipesA = {
 	d16 |
 	\dblc c8. e16
@@ -56,11 +56,11 @@ pipesBB = {
 	\grg a8. \grd c16
 	\dble d8. d16
 	\dblc c8. b16
-	\grg a8. A16
+	\grg a16 A8.
 	|
 	a8. \grd c16
-	\grg e8. A16
-	\hdblf g8. d16
+	\grg e16 A8.
+	\hdblf g16 d8.
 	\dble e8. c16
 	|
 	\thrwd d8. e16

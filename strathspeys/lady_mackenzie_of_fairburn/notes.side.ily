@@ -1,7 +1,7 @@
 % 4/4 Lady MacKenzie of Fairburn
 % Side
 \version "2.18.2"
-composerSide = "E.T. de Boone, v0.8, 2015"
+composerSide = "E.T. de Boone, v0.9, 2015"
 snareA = \drummode {
 	\flam d8. g16
 	d8.:32( g16)
@@ -43,10 +43,10 @@ snareBA = \drummode{
 	d8.[:32(\<  \dr g16]:32)(-> \>
 	d8.[:32)( g16]:32)(-> \<
 	d8.[:32)( g16]:32)(->
-	d8.) \!
+	d8.) \! \fr
 }
 snareBB = \drummode{
-	g16 \fr |
+	g16 |
 	\triplet {d8 g \flam d}
 	\triplet {g d \flam g}
 	\triplet {d8 g \flam d}
@@ -59,7 +59,7 @@ snareBB = \drummode{
 	|
 	\drag d16 d8 g16
 	d8.:32( g16)
-	\flam d8 \< \triplet {d16 g d }
+	\flamd \triplet { d8 \< g16 g d8 }
 	\flam g4-> \!
 	|
 	d8.[:32( g16]:32)(->
