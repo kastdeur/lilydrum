@@ -1,0 +1,34 @@
+#!/bin/bash
+MKDRUM_DIR="../"
+MKDRUMCOMMAND=$MKDRUM_DIR"makedrum"
+SCORES_DIR="./scores/"
+
+trap "echo Aborted!; exit;" SIGINT SIGTERM
+
+another_dir () {
+	d=$1
+	for f in $d/*
+	do
+		if [ -d $f ]; then
+			another_dir $f
+			continue
+		fi
+
+		if [ ! -f $f ]; then
+			continue
+		fi
+
+		if [[ ! "$f" == *.ly ]]; then
+			continue
+		fi
+
+		mkdir -p $SCORES_DIR${d/$MKDRUM_DIR}
+		#echo $SCORES_DIR${f/$MKDRUM_DIR}
+		$MKDRUMCOMMAND $f -d $SCORES_DIR${d/$MKDRUM_DIR}
+	done;
+}
+
+for d in ${MKDRUM_DIR}*_marches ${MKDRUM_DIR}strathspeys ${MKDRUM_DIR}standards ${MKDRUM_DIR}jigs ${MKDRUM_DIR}airs ${MKDRUM_DIR}hornpipes ${MKDRUM_DIR}other
+do
+	another_dir $d
+done;
