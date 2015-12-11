@@ -12,6 +12,7 @@ class MakeBook:
 	RUN_DIR = os.path.abspath(os.curdir)
 	SCORES_DIR = './scores/'
 	LY_DIR = '../'
+	ORDER_FILE = 'order.txt'
 	INSTRUMENTS = ['full','drums', 'pipes', 'bass', 'tenor', 'side','snare']
 	def __init__(self):
 
@@ -43,14 +44,17 @@ class MakeBook:
 
 			self.fwrite(u'\\addcontentsline{toc}{section}{Standards}')
 			for d in standards:
+				self.vprint()
 				self.vprint(os.path.join(self.SCORES_DIR,d))
 				self.path_walker(os.path.join(self.SCORES_DIR,d), level=1, content_line_level=1)
 			self.fwrite(u'\\addcontentsline{toc}{section}{Marches}')
 			for d in marches:
+				self.vprint()
 				self.vprint(os.path.join(self.SCORES_DIR,d))
 				self.path_walker(os.path.join(self.SCORES_DIR,d), level=1, content_line_level=2)
 
 			for d in tune_dirs:
+				self.vprint()
 				self.vprint(os.path.join(self.SCORES_DIR,d))
 				self.path_walker(os.path.join(self.SCORES_DIR,d))
 		except IOError:
@@ -59,8 +63,10 @@ class MakeBook:
 			self.fout.close()
 			raise
 
-	def vprint(self,line):
+	def vprint(self,line = None):
 		if self.args.verbose:
+			if line is None:
+				line = ''
 			print(line)
 
 	def fwrite(self,line):
@@ -139,24 +145,36 @@ class MakeBook:
 		if level < content_line_level:
 			self.fwrite(u'\\mysection{'+('sub'*level)+'section}{'+a[a.rfind('/')+1:].replace('_',' ').replace('-','/').title()+'}')
 		newline = False
-		for root, dirs, files in os.walk(a,False):
-			for f in files:
-				if not f.endswith('.pdf'):
-					continue
-				if self.args.instrument:
-					instr_in_file = False
-					for instr in self.args.instrument:
-						if instr in f:
-							self.vprint(instr)
-							instr_in_file = True
-							break
-					if not instr_in_file:
-						continue
-				# Include file
-				if newline:
-					self.fwrite(u'\\newpage')
 
-				newline = True
-				self.include_pdf(os.path.join(root,f), level+1)
+		if os.path.isfile(os.path.join(a, 'order.txt')):
+			self.vprint('Found order')
+			with open(os.path.join(a, self.ORDER_FILE)) as f:
+				line = f.readline().rstrip('\n')
+				while line:
+					self.path_walker(os.path.join(a,line), level+1)
+					line = f.readline().rstrip('\n')
+		else:
+			for root, dirs, files in os.walk(a,False):
+				for f in files:
+					if not f.endswith('.pdf'):
+						self.vprint('F! '+f)
+						continue
+					if self.args.instrument:
+						instr_in_file = False
+						for instr in self.args.instrument:
+							if instr in f:
+								self.vprint(instr)
+								instr_in_file = True
+								break
+						if not instr_in_file:
+							self.vprint('F! '+f)
+							continue
+					# Include file
+					self.vprint('F '+f)
+					if newline:
+						self.fwrite(u'\\newpage')
+
+					newline = True
+					self.include_pdf(os.path.join(root,f), level+1)
 # Run above
 MakeBook();

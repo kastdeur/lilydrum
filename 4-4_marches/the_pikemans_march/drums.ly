@@ -43,6 +43,7 @@
 			\tenorAB
 			s8
 
+			s8
 			\tenorBA
 			\tenorBB
 			\tenorBC

@@ -17,8 +17,8 @@ for ins in tenor;
 do
 	printf "\\documentclass{tex/score_book}
 
-\\title{Seaforth Highlanders of Holland\\\\ %s Scores}
-\\author{Eric Teunis de Boone}
+ \\title{Seaforth Highlanders of Holland\\\\ %s Scores}
+ \\author{Eric Teunis de Boone}
 
 \\begin{document}
 
@@ -42,9 +42,9 @@ done;
 
 echo "All setup!"
 
-read -p "Press [Enter] to compile *.tex"
+#read -p "Press [Enter] to compile *.tex"
 
-for f in ./*.tex;
-do
-	$LATEXCMD $f
-done;
+#for f in ./*.tex;
+#do
+#	$LATEXCMD $f
+#done;
