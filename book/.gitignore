@@ -1,7 +1,0 @@
-*.pdf
-*.aux
-*.log
-*.toc
-images/*
-scores/*
-tmp/*

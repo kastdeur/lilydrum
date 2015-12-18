@@ -98,7 +98,28 @@
 		"d8:32(" "\\triplet " -- "\\flam d16." "g32"  -- "\\drag g16" -- "\\triplet" "g:64" "d-> }"
     }
 }
-
+\score {
+	\new PipeBandDrumStaff {
+		\drummode {
+			\time 6/8
+			\repeat volta 2 {
+				\partial 8 d8:32(_"7" |
+				g8.[) g16 \dragd d8] d8.[ d16 \dragg g8] |
+				g8.[ \dragd d16 d8] d8.[ d16 \dragg g8] |
+				\flamddr d8. d16 g8 d4.:32(_"13" |
+				d8.) g16 d8 \flamg g4 d8:32(_"7" \fr |
+				\break
+				g8.[) g16 \dragd d8] d8.[ d16 \dragg g8] |
+				g8.[ \dragd d16 d8] d8.[ d16 \dragg g8] |
+				\flamddr d8. d16:64(_"5" d8) \flamd d8. d16 \flamg g8 |
+				d8.:32(_"5" d16) \flamg g8 \flamd d4 \fr |
+			}
+		}
+	}
+	\header {
+		title = "And now for something completely standard"
+	}
+}
 % # Writing parts
 % rolls
 % tuplets

@@ -34,6 +34,9 @@ class MakeDrum:
 		parser.add_argument('-c', '--pipefile',
 			dest='lilypipe', default='bagpipe.ly',
 			help='Use the specified file for pipes')
+		parser.add_argument('-i', '--include',
+			dest='includes', nargs='*', default=[],action='append',
+			help='Include the specified file for compiling')
 
 		parser.add_argument('-p', '--paper-size',
 			dest='papersize', default='a4',
@@ -44,9 +47,6 @@ class MakeDrum:
 		parser.add_argument('-s', '--staff-size',
 			dest='staffsize', default='20',
 			help='Staff size. Default: 16pt.')
-		parser.add_argument('-f', '--format',
-			dest='format', default=None,
-			help='Use header format file "header_{format}". Default: "header_default"')
 		parser.add_argument('-w', '--view-spacing',
 			action='store_true', dest='view_spacing', default=False,
 			help='Turn on "Paper.annotatespacing".')
@@ -92,11 +92,14 @@ class MakeDrum:
 		if self.args.list_file != '':
 			self.args.music_file.append(open(self.args.list_file, 'r').readlines())
 			close(self.args.list_file)
+
 		# Check for files
 		if not self.args.music_file:
 			parser.print_usage()
 			return
 
+		# Check for files to include
+		self.args.includes = [el for elements in self.args.includes for el in elements]
 
 		# Clean up of files
 		self.remove_tmp_dir = self.args.clean
@@ -122,15 +125,7 @@ class MakeDrum:
 		os.chdir(self.RUN_DIR)
 
 	def processit(self, tmp_dir, file, gen_out, compile):
-		if self.args.format is None:
-			if file.endswith(".book"):
-				header_format = "header_book"
-			else:
-				header_format = "header_default"
-		else:
-			header_format = "header_" + self.args.format
-
-		tmp_file = self.maketemplate(tmp_dir, file, header_format)
+		tmp_file = self.maketemplate(tmp_dir, file)
 
 		if gen_out is not None and gen_out != tmp_dir:
 			new_tmp_file = os.path.basename(tmp_file).replace(self.TMP_PREFIX, '');
@@ -176,7 +171,7 @@ class MakeDrum:
 						os.remove(logfile)
 					os.remove(tmp_file)
 
-	def maketemplate(self, tmp_dir, file, header_format):
+	def maketemplate(self, tmp_dir, file):
 		lily_includes = ''
 		include_drum_file = False
 		include_pipe_file = False
@@ -184,17 +179,21 @@ class MakeDrum:
 		for ext in ['full', 'side', 'tenor', 'bass', 'drum', 'snare']:
 			if ext in file:
 				include_drum_file = True
+				break
+
 		for ext in ['full', 'pipes']:
 			if ext in file:
 				include_pipe_file = True
+				break
+
 		if include_drum_file:
-			lily_includes = lily_includes + u"""
-\\include \""""+self.args.lilydrum+"""\"
-"""
+			self.args.includes.insert(0,self.args.lilydrum)
+
 		if include_pipe_file:
-			lily_includes = lily_includes + u"""
-\\include \""""+self.args.lilypipe+"""\"
-"""
+			self.args.includes.insert(0, self.args.lilypipe)
+
+		for f in self.args.includes:
+			lily_includes = lily_includes + "\n\\include \"{}\"".format(f)
 
 		# set up a tmp file with template and file combined
 		tmp_file = os.path.join(tmp_dir, self.TMP_PREFIX + os.path.relpath(file).replace('/', '-'))
@@ -210,11 +209,17 @@ class MakeDrum:
 #(ly:set-option 'point-and-click #f)
 """+ lily_includes +"""
 
-\\include \""""+os.path.join(os.path.abspath(self.MASTER_DIR), header_format.strip(".ily")+""".ily""")+"""\"
 
 #(set-global-staff-size """+self.args.staffsize+""")
 #(set-default-paper-size \""""+self.args.papersize+"""\" '"""+self.args.orientation+""")
 
+%\layout {
+% \context {
+%   \Score {
+%     \override NonMusicalPaperColumn #'line-break-permission = ##f
+%   }
+% }
+%}
 % The tune to generate.
 		""")
 
