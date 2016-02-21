@@ -11,10 +11,10 @@ from argparse import ArgumentParser
 class MakeDrum:
 	LILYPOND = 'lilypond'
 	VERSION  = '0.9.5'
-	TMP_DIR  = './tmp'
-	TMP_PREFIX = 'tmp_'
 	MASTER_DIR = os.path.dirname(os.path.abspath(__file__))
 	RUN_DIR = os.path.abspath(os.curdir)
+	TMP_DIR  = './tmp'
+	TMP_PREFIX = 'tmp_'
 
 	def __init__(self):
 		# Gather options and create the template file
@@ -29,7 +29,7 @@ class MakeDrum:
 			help='show Lilypond version and exit')
 
 		parser.add_argument('-x', '--drumfile',
-			dest='lilydrum', default='lilydrum.ly',
+			dest='lilydrum', default=os.path.join(self.MASTER_DIR,'lilydrum.ly'),
 			help='Use the specified file for drums')
 		parser.add_argument('-c', '--pipefile',
 			dest='lilypipe', default='bagpipe.ly',
@@ -115,14 +115,12 @@ class MakeDrum:
 				print('Seems like no output directory can be created')
 				return
 
-		os.chdir(self.MASTER_DIR)
 		for file_path in self.args.music_file:
 			self.processit(self.TMP_DIR, os.path.join(self.RUN_DIR, file_path), self.args.gen_out, self.args.compile)
 
 		#if not
 		#os.rmdir(self.TMP_DIR)
 
-		os.chdir(self.RUN_DIR)
 
 	def processit(self, tmp_dir, file, gen_out, compile):
 		tmp_file = self.maketemplate(tmp_dir, file)
@@ -196,8 +194,10 @@ class MakeDrum:
 			lily_includes = lily_includes + "\n\\include \"{}\"".format(f)
 
 		# set up a tmp file with template and file combined
-		tmp_file = os.path.join(tmp_dir, self.TMP_PREFIX + os.path.relpath(file).replace('/', '-'))
+		tmp_file = os.path.join(tmp_dir, self.TMP_PREFIX + os.path.relpath(file).replace('../music-','',1).replace('/', '-'))
 
+		print(file + ' is to be templated')
+		print(tmp_file + ' is templated file')
 		out_file = codecs.open(tmp_file, 'w+', 'utf8')
 		out_file.write(u'\ufeff')
 

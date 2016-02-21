@@ -95,6 +95,15 @@ drumPitchNames =
 		\accepts "PipeBandDrumStaff"
 	}
 }
+\midi {
+	\context {
+		\DrumStaff
+		\name PipeBandDrumStaff
+		\alias DrumStaff
+
+		\override DrumStaff.midiInstrument = #"drums"
+	}
+}
 
 % ===================================================	%
 % 	*Shorts* for Naming									%
