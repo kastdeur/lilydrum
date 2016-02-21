@@ -152,7 +152,6 @@ class MakeDrum:
 			if not self.args.log:
 				print()
 			lilyout = os.path.join(self.RUN_DIR, self.args.out_dir, os.path.basename(tmp_file).replace(self.TMP_PREFIX, '').replace(".ly", ''))
-			print (lilyout)
 			lilycmd = self.LILYPOND+' --pdf --output='+lilyout+' '+tmp_file+log
 
 			if os.system(lilycmd) != 0:
@@ -196,8 +195,6 @@ class MakeDrum:
 		# set up a tmp file with template and file combined
 		tmp_file = os.path.join(tmp_dir, self.TMP_PREFIX + os.path.relpath(file).replace('../music-','',1).replace('/', '-'))
 
-		print(file + ' is to be templated')
-		print(tmp_file + ' is templated file')
 		out_file = codecs.open(tmp_file, 'w+', 'utf8')
 		out_file.write(u'\ufeff')
 
