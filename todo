@@ -1,9 +1,10 @@
 TODO
- * show 8th and 16th beats in beaming, currently only 8ths:  d32[[ g] d[ g]] d32[[ g] d[ g]]
+ * See if aliases work
+ * show 8th and 16th beats in autobeaming, currently only 8ths:  d32[[ g] d[ g]] d32[[ g] d[ g]]
  * Macro for tutti's (unisons)
 	- on just one note
 	- with open ending
- * Macro for "Part 2 of $n"
+ * Macro for "Part $m of $n"
  * If 8/16/32/..th notes come before a flam, they have a flag instead of a beam (fixable by explicit beaming, but rather have a good autobeaming)
  * A tuplet beginning with a flam has a strange tuplet beam (slanted) (fixable by putting the flam outside of the tuplet .. However the flam function doesnt work that way (yet))
  * It's customary to have 4 bars per line for portrait and 8 for landscape...
