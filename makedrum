@@ -51,6 +51,9 @@ class MakeDrum:
 			action='store_true', dest='view_spacing', default=False,
 			help='Turn on "Paper.annotatespacing".')
 
+		parser.add_argument('-r','--suffix',
+			dest='suffix', default='',
+			help='String added at end of pdf\'s filename')
 		parser.add_argument('-g','--generated',
 			dest='gen_out', default=self.TMP_DIR,
 			help='Put generated lilyfiles in $gen_out')
@@ -63,7 +66,7 @@ class MakeDrum:
 		parser.add_argument('--no-cleanup',
 			action='store_false', dest='clean', default=True,
 			help='Leave all temporary files in place')
-		parser.add_argument('-d', '--out_dir',
+		parser.add_argument('-d', '--out-dir',
 			dest='out_dir', default='pdf',
 			help='Output dir, for lilypond. If it doesn\'t exist, try to create it')
 		parser.add_argument('music_file',
@@ -193,8 +196,8 @@ class MakeDrum:
 			lily_includes = lily_includes + "\n\\include \"{}\"".format(f)
 
 		# set up a tmp file with template and file combined
-		tmp_file = os.path.join(tmp_dir, self.TMP_PREFIX + os.path.relpath(file).replace('../music-','',1).replace('/', '-'))
-
+		tmp_file = os.path.join(tmp_dir, self.TMP_PREFIX + os.path.relpath(file).replace('../','').replace('music/','',1).replace('/', '-')[:-3] + self.args.suffix + '.ly')
+		print(tmp_file)
 		out_file = codecs.open(tmp_file, 'w+', 'utf8')
 		out_file.write(u'\ufeff')
 
