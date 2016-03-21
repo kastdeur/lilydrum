@@ -32,3 +32,4 @@
 \include "lilydrum/embellishments.ily"
 \include "lilydrum/flourishing.ily"
 \include "lilydrum/special_sticking.ily"
+\include "lilydrum/midi.ily"
