@@ -54,47 +54,34 @@ sruffddr = \drummode { \drumgrace { d16[\startGroup g g] } }	% Swiss Ruff left  
 %%	Embellishment functions, automatic left or right	%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Flam
-flam = #(define-music-function (parser location note) (ly:music?) #{
-	% is note right-handed? then \flamd
-	% if left, then \flamg
+autohand = #(define-music-function (parser location note left right) (ly:music? ly:music? ly:music?) #{
+	#(newline)
+	#(display "Fix autohand function for arbitrary depth")
+	
 	#(if (string=? (symbol->string (ly:music-property note 'drum-type)) "left-hand")
-          #{ \flamg #}
-          #{ \flamd #})
+		#{ $left #}
+		#{ $right #})
 	% print the note, else it won't show up
 	$note
+#})
+
+% Flam
+flam = #(define-music-function (parser location note) (ly:music?) #{
+	\autohand $note { \flamg }  { \flamd }
 #})
 
 % Drag
 drag = #(define-music-function (parser location note) (ly:music?) #{
-	% is note right-handed? then \flamd
-	% if left, then \flamg
-	#(if (string=? (symbol->string (ly:music-property note 'drum-type)) "left-hand")
-          #{ \dragg #}
-          #{ \dragd #})
-	% print the note, else it won't show up
-	$note
+    \autohand $note \dragg \dragd
 #})
 % Open Drag
 odrag = #(define-music-function (parser location note) (ly:music?) #{
-	% is note right-handed? then \flamd
-	% if left, then \flamg
-	#(if (string=? (symbol->string (ly:music-property note 'drum-type)) "left-hand")
-          #{ \odragg #}
-          #{ \odragd #})
-	% print the note, else it won't show up
-	$note
+	\autohand $note \odragg \odragd
 #})
 
 % Ruff
 ruff = #(define-music-function (parser location note) (ly:music?) #{
-	% is note right-handed? then \flamd
-	% if left, then \flamg
-	#(if (string=? (symbol->string (ly:music-property note 'drum-type)) "left-hand")
-          #{ \ruffg #}
-          #{ \ruffd #})
-	% print the note, else it won't show up
-	$note
+	\autohand $note \ruffg \ruffd
 #})
 
 % Swiss Ruff

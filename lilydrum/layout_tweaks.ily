@@ -24,15 +24,13 @@ drumPitchNames =
 )
 
 \layout {
+	indent = 0.0
 	\context {
 		\DrumStaff
 		\name PipeBandDrumStaff
 		\alias DrumStaff
 		
 		drumStyleTable = #(alist->hash-table pipeband-style)
-
-		% trying midi are you?
-		\override DrumStaff.midiInstrument = #"drums"
 
 		% one line per staff
 		\override StaffSymbol.line-positions = #'(0)

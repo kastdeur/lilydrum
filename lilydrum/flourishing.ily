@@ -44,6 +44,12 @@ sdcoop = #(define-music-function (parser location notes end) (ly:music? ly:music
 					$end
 				#})
 
-% stf = \splitTheFeather
+stf = #(define-music-function (parser location note) (ly:music?)
+	#{
+		$note ^\splitTheFeather
+		%\once \set TextScriptEvent.text = \splitTheFeather
+	#}
+)
+		
 % cart = \cartWheel
 % fl = \flourish
