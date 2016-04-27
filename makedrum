@@ -5,7 +5,7 @@
 ##
 ## Most of programming was done by Sven Axelsson, http://svenax.net/
 
-import codecs, os
+import io, os
 from argparse import ArgumentParser
 
 class MakeDrum:
@@ -51,12 +51,15 @@ class MakeDrum:
 			action='store_true', dest='view_spacing', default=False,
 			help='Turn on "Paper.annotatespacing".')
 
-		parser.add_argument('-r','--suffix',
+		parser.add_argument('-r', '--suffix',
 			dest='suffix', default='',
 			help='String added at end of pdf\'s filename')
-		parser.add_argument('-g','--generated',
+		parser.add_argument('-g', '--generated',
 			dest='gen_out', default=self.TMP_DIR,
 			help='Put generated lilyfiles in $gen_out')
+		parser.add_argument('-q', '--self-compilable', default=False,
+			action='store_true', dest='compilable',
+			help='Make a self compilable file')
 		parser.add_argument('--no-compile', default=True,
 			action='store_false', dest='compile',
 			help='Do not compile generated Lilypond files')
@@ -93,8 +96,9 @@ class MakeDrum:
 
 		# Input files
 		if self.args.list_file != '':
-			self.args.music_file.append(open(self.args.list_file, 'r').readlines())
-			close(self.args.list_file)
+						with io.open(self.args.list_file, 'r', encoding='utf8') as list_file:
+							for line in list_file.readlines():
+								self.args.music_file.append(line)
 
 		# Check for files
 		if not self.args.music_file:
@@ -121,12 +125,15 @@ class MakeDrum:
 		for file_path in self.args.music_file:
 			self.processit(self.TMP_DIR, os.path.join(self.RUN_DIR, file_path), self.args.gen_out, self.args.compile)
 
-		#if not
-		#os.rmdir(self.TMP_DIR)
+		if not os.listdir(self.TMP_DIR):
+			os.rmdir(self.TMP_DIR)
 
 
 	def processit(self, tmp_dir, file, gen_out, compile):
-		tmp_file = self.maketemplate(tmp_dir, file)
+		print ('Generating for ',file, end=' ', flush=True)
+		tmp_file = self.maketemplate(tmp_dir, file, self.args.compilable)
+		print ('[OK]')
+
 
 		if gen_out is not None and gen_out != tmp_dir:
 			new_tmp_file = os.path.basename(tmp_file).replace(self.TMP_PREFIX, '');
@@ -169,9 +176,11 @@ class MakeDrum:
 					#remove files
 					if self.args.log:
 						os.remove(logfile)
-					os.remove(tmp_file)
+					if not self.args.compilable:
+						os.remove(tmp_file)
 
-	def maketemplate(self, tmp_dir, file):
+	def maketemplate(self, tmp_dir, file, compilable):
+
 		lily_includes = ''
 		include_drum_file = False
 		include_pipe_file = False
@@ -187,59 +196,76 @@ class MakeDrum:
 				break
 
 		if include_drum_file:
-			self.args.includes.insert(0,self.args.lilydrum)
+			self.args.includes.insert(0, self.args.lilydrum)
 
 		if include_pipe_file:
 			self.args.includes.insert(0, self.args.lilypipe)
-
-		for f in self.args.includes:
-			lily_includes = lily_includes + "\n\\include \"{}\"".format(f)
-
 		# set up a tmp file with template and file combined
 		tmp_file = os.path.join(tmp_dir, self.TMP_PREFIX + os.path.relpath(file).replace('../','').replace('music/','',1).replace('/', '-')[:-3] + self.args.suffix + '.ly')
-		print(tmp_file)
-		out_file = codecs.open(tmp_file, 'w+', 'utf8')
-		out_file.write(u'\ufeff')
 
-		out_file.write(u"""
-% Generated from """+file+""" by """+__file__+""" version """+self.VERSION+"""
+		# Make the file
+		with io.open(tmp_file, 'w+', encoding='utf8') as out_file:
 
+			def printline(line, relpath = file):
+
+				# Check if there's an include in the line, if there is try to copy it all (Recursive)
+				if line.startswith(u'\\include'):
+					# Rewrite includes to absolute location of file
+					incline = line.replace('\\include', '').strip('"\'\n ')
+					printline(u"\n %%%% \"{}\"\n".format(incline))
+
+					if not incline.startswith('\\'): #already absolute
+						incline = os.path.join(os.path.abspath(os.path.dirname(relpath)), incline)
+
+					if compilable:
+						try:
+							inc_file = io.open(incline,'r',encoding='utf8')
+						except IOError:
+							out_file.write(line + "%% Error to copy %%\n")
+							return
+						with inc_file:
+							for subline in inc_file.readlines():
+								printline(subline, incline)
+					else:
+						out_file.write(u"\\include \""+incline+"\"\n")
+					return
+
+				out_file.write(line.replace('\r', ''))
+
+			# Go do things with it
+			printline(u'\ufeff')
+
+			printline(
+u"""% Generated from """+file+""" by """+__file__+""" version """+self.VERSION+"""
 \\version "2.18.0"
 
 #(ly:set-option 'point-and-click #f)
-"""+ lily_includes +"""
-
-
-#(set-global-staff-size """+self.args.staffsize+""")
-#(set-default-paper-size \""""+self.args.papersize+"""\" '"""+self.args.orientation+""")
-
 %\layout {
 % \context {
 %   \Score {
-%     \override NonMusicalPaperColumn #'line-break-permission = ##f
+%	 \override NonMusicalPaperColumn #'line-break-permission = ##f
 %   }
 % }
 %}
+""")
+			for f in self.args.includes:
+				printline(u"\n")
+				printline(u"\\include \"{}\"".format(f), self.RUN_DIR+'/build')
+
+			printline(u"""
+#(set-global-staff-size """+self.args.staffsize+""")
+#(set-default-paper-size \""""+self.args.papersize+"""\" '"""+self.args.orientation+""")
+
 % The tune to generate.
-		""")
+""")
 
-		# Read lily file into tmp file
-		music = codecs.open(file, 'r', 'utf8').read()
-		if music.startswith(u'\ufeff'): music = music[1:]
-		music = music.split(u'\n')
-		printit = 1
-		for line in music:
-			if line.startswith(u'\\include "lilydrum.ly"'): continue
-			if line.startswith(u'\\include'):
-				# Rewrite includes to absolute location of file
-				incline = line.replace('\\include', '').strip('"\' ')
-				if not incline.startswith('\\'): #already absolute
-					incline = os.path.join(os.path.abspath(os.path.dirname(file)), incline)
-					line = "\\include \""+incline+"\""
-			if printit:
-				out_file.write(line.replace('\r', '')+'\n')
-		out_file.close()
+			# Read lily file into tmp file
+			with io.open(file, 'r', encoding='utf8') as in_file:
+				for line in in_file.readlines():
+					if line.startswith(u'\ufeff'): continue
 
+					printline(line)
 		# Return tmp_file_path
 		return tmp_file
+
 MakeDrum();
