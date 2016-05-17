@@ -1,4 +1,4 @@
-#!/usr/bin/python3.4
+#!/usr/bin/env python3
 
 ## Generate pdf form lilypond file
 ## by using standard command
@@ -45,8 +45,8 @@ class MakeDrum:
 			dest='orientation', default='landscape',
 			help='Paper orientation. Default: landscape')
 		parser.add_argument('-s', '--staff-size',
-			dest='staffsize', default='20',
-			help='Staff size. Default: 16pt.')
+			dest='staffsize', default='18',
+			help='Staff size. Default: 18pt.')
 		parser.add_argument('-w', '--view-spacing',
 			action='store_true', dest='view_spacing', default=False,
 			help='Turn on "Paper.annotatespacing".')
