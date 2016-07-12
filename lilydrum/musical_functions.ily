@@ -5,13 +5,13 @@
 
 eighthBeaming = {
   \set baseMoment = #(ly:make-moment 1/8)
-  \set beatStructure = #'( 2  2 )
+  \set beatStructure = #'( 2 )
 }
 eighthReelBeaming = {
   \set baseMoment = #(ly:make-moment 1/8)
-  \set beatStructure = #'( 4 4)
+  \set beatStructure = #'( 4 )
 }
-compoundEighthBeaming = {
+eighthCompoundBeaming = {
   \set baseMoment = #(ly:make-moment 1/8)
   \set beatStructure = #'( 3 )
 }
