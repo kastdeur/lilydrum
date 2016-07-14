@@ -29,10 +29,10 @@ class MakeDrum:
 			help='show Lilypond version and exit')
 
 		parser.add_argument('-x', '--drumfile',
-			dest='lilydrum', default=os.path.join(self.MASTER_DIR,'lilydrum.ly'),
+			dest='lilydrum', nargs='+', default=os.path.join(self.MASTER_DIR,'lilydrum.ly'),
 			help='Use the specified file for drums')
 		parser.add_argument('-c', '--pipefile',
-			dest='lilypipe', default='bagpipe.ly',
+			dest='lilypipe', nargs='+', default=os.path.join(self.MASTER_DIR,'bagpipe.ly'),
 			help='Use the specified file for pipes')
 		parser.add_argument('-i', '--include',
 			dest='includes', nargs='*', default=[],action='append',
@@ -96,9 +96,9 @@ class MakeDrum:
 
 		# Input files
 		if self.args.list_file != '':
-						with io.open(self.args.list_file, 'r', encoding='utf8') as list_file:
-							for line in list_file.readlines():
-								self.args.music_file.append(line)
+			with io.open(self.args.list_file, 'r', encoding='utf8') as list_file:
+				for line in list_file.readlines():
+					self.args.music_file.append(line)
 
 		# Check for files
 		if not self.args.music_file:
@@ -185,21 +185,23 @@ class MakeDrum:
 		include_drum_file = False
 		include_pipe_file = False
 		# find out whether drum, pipes, or full score
-		for ext in ['full', 'side', 'tenor', 'bass', 'drum', 'snare']:
-			if ext in file:
-				include_drum_file = True
-				break
-
-		for ext in ['full', 'pipes']:
-			if ext in file:
-				include_pipe_file = True
-				break
+		if self.args.lilydrum and self.args.lilydrum != '':
+			for ext in ['full', 'side', 'tenor', 'bass', 'drum', 'snare']:
+				if ext in file:
+					include_drum_file = True
+					break
+		if self.args.lilypipe and self.args.lilypipe != '':
+			for ext in ['full', 'pipes']:
+				if ext in file:
+					include_pipe_file = True
+					break
 
 		if include_drum_file:
 			self.args.includes.insert(0, self.args.lilydrum)
 
 		if include_pipe_file:
 			self.args.includes.insert(0, self.args.lilypipe)
+
 		# set up a tmp file with template and file combined
 		tmp_file = os.path.join(tmp_dir, self.TMP_PREFIX + os.path.relpath(file).replace('../','').replace('music/','',1).replace('/', '-')[:-3] + self.args.suffix + '.ly')
 
@@ -216,6 +218,7 @@ class MakeDrum:
 
 					if not incline.startswith('\\'): #already absolute
 						incline = os.path.join(os.path.abspath(os.path.dirname(relpath)), incline)
+
 
 					if compilable:
 						try:
