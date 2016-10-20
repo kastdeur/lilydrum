@@ -28,6 +28,7 @@
 #(ly:set-option 'relative-includes #t)
 
 \include "lilydrum/layout_tweaks.ily"
+\include "lilydrum/naming.ily"
 \include "lilydrum/musical_functions.ily"
 \include "lilydrum/embellishments.ily"
 \include "lilydrum/flourishing.ily"
