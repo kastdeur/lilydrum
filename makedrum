@@ -197,10 +197,14 @@ class MakeDrum:
 					break
 
 		if include_drum_file:
-			self.args.includes.insert(0, self.args.lilydrum)
+			for f in self.args.lilydrum:
+				print(f)
+				self.args.includes.insert(0, f)
 
 		if include_pipe_file:
-			self.args.includes.insert(0, self.args.lilypipe)
+			for f in self.args.lilypipe:
+				print(f)
+				self.args.includes.insert(0, f)
 
 		# set up a tmp file with template and file combined
 		tmp_file = os.path.join(tmp_dir, self.TMP_PREFIX + os.path.relpath(file).replace('../','').replace('music/','',1).replace('/', '-')[:-3] + self.args.suffix + '.ly')
