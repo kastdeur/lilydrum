@@ -93,20 +93,3 @@ drumPitchNames =
 		\accepts "PipeBandDrumStaff"
 	}
 }
-
-% ===================================================	%
-% 	*Shorts* for Naming									%
-% ===================================================	%
-
-instrumentSide = "Side"
-instrumentTenor = "Tenor"
-instrumentBass = "Bass"
-instrumentPipes = "Pipes"
-shortInstrumentSide = "S.D."
-shortInstrumentTenor = "T.D."
-shortInstrumentBass = "B.D."
-shortInstrumentPipes = "P."
-composerSide  = ""
-composerTenor = ""
-composerBass  = ""
-composerPipes = ""

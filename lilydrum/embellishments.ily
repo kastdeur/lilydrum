@@ -69,28 +69,37 @@ autohand = #(define-music-function (parser location note left right) (ly:music? 
 flam = #(define-music-function (parser location note) (ly:music?) #{
 	\autohand $note { \flamg }  { \flamd }
 #})
+flamdr = #(define-music-function (parser location note) (ly:music?) #{
+	\autohand $note { \flamgdr }  { \flamddr }
+#})
 
 % Drag
 drag = #(define-music-function (parser location note) (ly:music?) #{
     \autohand $note \dragg \dragd
 #})
+dragdr = #(define-music-function (parser location note) (ly:music?) #{
+    \autohand $note \draggdr \dragddr
+#})
 % Open Drag
 odrag = #(define-music-function (parser location note) (ly:music?) #{
 	\autohand $note \odragg \odragd
+#})
+odragdr = #(define-music-function (parser location note) (ly:music?) #{
+	\autohand $note \odraggdr \odragddr
 #})
 
 % Ruff
 ruff = #(define-music-function (parser location note) (ly:music?) #{
 	\autohand $note \ruffg \ruffd
 #})
+ruffdr = #(define-music-function (parser location note) (ly:music?) #{
+	\autohand $note \ruffgdr \ruffddr
+#})
 
 % Swiss Ruff
 sruff = #(define-music-function (parser location note) (ly:music?) #{
-	% is note right-handed? then \flamd
-	% if left, then \flamg
-	#(if (string=? (symbol->string (ly:music-property note 'drum-type)) "left-hand")
-          #{ \sruffg #}
-          #{ \sruffd #})
-	% print the note, else it won't show up
-	$note
+  	\autohand $note \sruffg \sruffd
+#})
+sruffdr = #(define-music-function (parser location note) (ly:music?) #{
+  	\autohand $note \sruffgdr \sruffddr
 #})
