@@ -185,32 +185,30 @@ class MakeDrum:
 		lily_includes = ''
 		include_drum_file = False
 		include_pipe_file = False
+		
+		if not self.args.lilydrum or self.args.lilydrum == "''":
+			self.args.lilydrum = False
 
+		if not self.args.lilypipe or self.args.lilypipe == "''":
+			self.args.lilypipe = False
 		# find out whether drum, pipes, or full score
 		if self.args.lilydrum:
 			for ext in ['full', 'side', 'tenor', 'bass', 'drum', 'snare']:
 				if ext in file:
 					include_drum_file = True
 					break
-		else:
-		    print('no lilydrum file')
+
 		if self.args.lilypipe:
 			for ext in ['full', 'pipes']:
 				if ext in file:
 					include_pipe_file = True
 					break
-		else:
-		    print('no lilypipe file')
 
 		if include_drum_file:
-			for f in self.args.lilydrum:
-				print(f)
-				self.args.includes.insert(0, f)
+			self.args.includes.insert(0, self.args.lilydrum)
 
 		if include_pipe_file:
-			for f in self.args.lilypipe:
-				print(f)
-				self.args.includes.insert(0, f)
+			self.args.includes.insert(0, self.args.lilypipe)
 
 		# set up a tmp file with template and file combined
 		tmp_file = os.path.join(tmp_dir, self.TMP_PREFIX + os.path.relpath(file).replace('../','').replace('music/','',1).replace('/', '-')[:-3] + self.args.suffix + '.ly')
