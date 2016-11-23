@@ -16,6 +16,18 @@ eighthCompoundBeaming = {
   \set beatStructure = #'( 3 )
 }
 
+sixteenthBeaming = {
+  \set baseMoment = #(ly:make-moment 1/16)
+  \set beatStructure = #'( 4 )
+}
+sixteenthReelBeaming = {
+  \set baseMoment = #(ly:make-moment 1/16)
+  \set beatStructure = #'( 8 )
+}
+sixteenthCompoundBeaming = {
+  \set baseMoment = #(ly:make-moment 1/16)
+  \set beatStructure = #'( 6 )
+}
 % triplet
 triplet = #(define-music-function (parser location notes) (ly:music?) #{ \tuplet 3/2 { $notes } #})
 

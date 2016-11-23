@@ -79,6 +79,20 @@ drumPitchNames =
 		strictBeatBeaming = ##t
 		\numericTimeSignature
 
+		%Because it's funny
+		\override Clef.stencil = #
+			(lambda (grob)(grob-interpret-markup grob
+				#{ \markup\combine
+					\musicglyph #"clefs.percussion"
+					\translate #'(2 . 0)
+					\override #'(baseline-skip . 1) 
+					\column {
+					  "R"
+					  "L"
+					}
+				#}
+			))
+
 	}
 	\context {
 		\Score
