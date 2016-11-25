@@ -36,6 +36,13 @@ rthrow = ^\markup \center-column {
 		/height .6 def
 		/fwidth width radius add def
 	
+		/closedpoint { 
+			radius 0 360 arc 
+			gsave filled neg 
+			setgray fill 
+			grestore 
+		stroke } def
+
 		/dotstick { 
 		  	0 0 moveto
 			0 0 closedpoint 	
@@ -50,7 +57,7 @@ rthrow = ^\markup \center-column {
 		0 0 dotstick
 		stroke		
 		"
-	}
+}
 lthrow = ^\markup \center-column {
   		\postscript #"
 		/width 2 def
@@ -58,7 +65,14 @@ lthrow = ^\markup \center-column {
 		/filled 1 def
 		/height .6 def
 		/fwidth width radius add def
-	
+
+		/closedpoint { 
+			radius 0 360 arc 
+			gsave filled neg 
+			setgray fill 
+			grestore 
+		stroke } def
+
 		/dotstick { 
 			radius 0 closedpoint 	
 			radius 0  moveto 
@@ -71,7 +85,8 @@ lthrow = ^\markup \center-column {
 		0 height translate
 		0 0 dotstick
 		stroke		
-		"	}
+		"
+}
 bthrow = ^\markup \center-column {
   		\postscript #"
 		/width 2 def

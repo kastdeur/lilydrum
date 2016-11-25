@@ -17,7 +17,7 @@
   }
 }
 
-\include "lilydrum.ly"
+\include "./lilydrum.ly"
 
 \score {
 	\new PipeBandDrumStaff {
@@ -45,7 +45,7 @@
 
 \score {
 	\new PipeBandDrumStaff {
-	 	\tempo 2/4
+	 	\time 2/4
 		\drummode {
 			d^\splitTheFeather g^\cartWheel
 			d^\up r4 
