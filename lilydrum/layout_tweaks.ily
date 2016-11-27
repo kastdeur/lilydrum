@@ -24,7 +24,6 @@ drumPitchNames =
 )
 
 \layout {
-	indent = 0.0
 	\context {
 		\DrumStaff
 		\name PipeBandDrumStaff
