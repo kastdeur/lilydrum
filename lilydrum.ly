@@ -24,7 +24,6 @@
 %	"g" for the left hand ("gauche")
 %-----------------------------------------
 
-#(ly:set-option 'point-and-click #f)
 #(ly:set-option 'relative-includes #t)
 
 \include "lilydrum/layout_tweaks.ily"

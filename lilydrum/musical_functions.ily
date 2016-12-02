@@ -5,28 +5,28 @@
 
 eighthBeaming = {
   \set baseMoment = #(ly:make-moment 1/8)
-  \set beatStructure = #'( 2 )
+  \set beatStructure = #'( 2 2 2 2)
 }
 eighthReelBeaming = {
   \set baseMoment = #(ly:make-moment 1/8)
-  \set beatStructure = #'( 4 )
+  \set beatStructure = #'( 4 4 4 4)
 }
 eighthCompoundBeaming = {
   \set baseMoment = #(ly:make-moment 1/8)
-  \set beatStructure = #'( 3 )
+  \set beatStructure = #'( 3 3 3 3)
 }
 
 sixteenthBeaming = {
   \set baseMoment = #(ly:make-moment 1/16)
-  \set beatStructure = #'( 4 )
+  \set beatStructure = #'( 4 4 4 4)
 }
 sixteenthReelBeaming = {
   \set baseMoment = #(ly:make-moment 1/16)
-  \set beatStructure = #'( 8 )
+  \set beatStructure = #'( 8 8 8 8)
 }
 sixteenthCompoundBeaming = {
   \set baseMoment = #(ly:make-moment 1/16)
-  \set beatStructure = #'( 6 )
+  \set beatStructure = #'( 6 6 6 6)
 }
 % triplet
 triplet = #(define-music-function (parser location notes) (ly:music?) #{ \tuplet 3/2 { $notes } #})
