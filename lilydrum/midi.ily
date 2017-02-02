@@ -11,10 +11,10 @@ sidePitchTwo		= #(ly:make-pitch -2 1 NATURAL)
 
 tenorPitchOne		= #(ly:make-pitch -2 3 NATURAL)
 tenorPitchTwo		= #(ly:make-pitch -2 4 NATURAL)
-tenorPitchThree		= #(ly:make-pitch -2 5 NATURAL)
-tenorPitchFour		= #(ly:make-pitch -2 6 NATURAL)
-tenorPitchFive		= #(ly:make-pitch -1 0 NATURAL)
-tenorPitchSix		= #(ly:make-pitch -1 1 NATURAL)
+tenorPitchThree		= #(ly:make-pitch -2 5 NATURAL)%
+tenorPitchFour		= #(ly:make-pitch -2 6 NATURAL)%
+tenorPitchFive		= #(ly:make-pitch -1 0 NATURAL)%Seems the nicest
+tenorPitchSix		= #(ly:make-pitch -1 1 NATURAL)%
 tenorPitchSeven		= #(ly:make-pitch -2 3 NATURAL)
 tenorPitchEight		= #(ly:make-pitch -2 3 NATURAL)
 tenorPitchNine		= #(ly:make-pitch -2 3 NATURAL)
@@ -24,10 +24,15 @@ tenorPitchEleven	= #(ly:make-pitch -2 3 NATURAL)
 % Default Pitches
 sideDefault = \sidePitchTwo
 bassDefault = \bassPitchTwo
-tenorDefault = \tenorPitchSeven
+tenorDefault = \tenorPitchFive
 
 midiDrumPitches.right-hand = \sideDefault
 midiDrumPitches.left-hand = \sideDefault
+
+midiTenor = {
+  \set midiDrumPitches.right-hand = \tenorDefault
+  \set midiDrumPitches.left-hand = \tenorDefault
+}
 
 \midi {
 	\context {

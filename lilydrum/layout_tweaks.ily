@@ -106,3 +106,6 @@ drumPitchNames =
 		\accepts "PipeBandDrumStaff"
 	}
 }
+
+% Explicit bar lines (End + Repeat)
+#(define-bar-line ".|:-|." "|." ".|:" "|.")

@@ -18,14 +18,14 @@ up = ^\markup \center-column {% Arrow-head and line do not line up nicely most o
 				\draw-line #'(0 . -3) % draw stick
 		%}
 	}
-blfy = ^\markup \center-column { &infty; }
+bfly = ^\markup \center-column { \char ##x221E }
 rblfy = ^\markup \center-column {
 	  \line{
 		\combine
 			\arrow-head #X #LEFT ##f
 			\draw-line #'(3 . 0 )
 		}
-		\line {	&infy; }
+		\line {	\char ##x221E }
 }
 
 rthrow = ^\markup \center-column {

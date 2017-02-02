@@ -50,9 +50,12 @@ dynLine = #(define-music-function
 	#})
 
 % unison brackets
-% still to add: a little 'u'
+% TODO: a little 'u'
+% TODO: open ended brackets(\odr,\ofr)
 dr = #(define-event-function (parser location) () #{ \startGroup #})
 fr = #(define-event-function (parser location) () #{ \stopGroup #})
+odr = #(define-event-function (parser location) () #{ \startGroup #})
+ofr = #(define-event-function (parser location) () #{ \stopGroup #})
 tutti = #(define-event-function (parser location notes) (ly:music?) #{
 	\startGroup
 	$notes
