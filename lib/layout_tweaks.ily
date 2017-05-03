@@ -53,6 +53,8 @@ drumPitchNames =
 		% dynamics up
 		\dynamicUp
 
+		% This does not work nicely together with marking up flourishes
+
 		% slurs below rolls number
 		%\override TextScript.outside-staff-priority = ##f
 		%\override TextScript.side-axis = #0

@@ -342,11 +342,7 @@ scoopo = #(define-music-function (parser location beg notes) (ly:music? ly:music
 				$notes
 				\stopGroup
 			#})
-sdcoop = #(define-music-function (parser location notes end) (ly:music? ly:music?)
-				#{
-					$notes
-					$end
-				#})
+
 %---------------------------------------------------%
 % music function definitions
 %---------------------------------------------------%

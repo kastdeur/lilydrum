@@ -26,10 +26,10 @@
 
 #(ly:set-option 'relative-includes #t)
 
-\include "lilydrum/layout_tweaks.ily"
-\include "lilydrum/musical_functions.ily"
-\include "lilydrum/embellishments.ily"
-\include "lilydrum/flourishing.ily"
-\include "lilydrum/special_sticking.ily"
-\include "lilydrum/rehearsal_marks.ily"
-\include "lilydrum/midi.ily"
+\include "lib/layout_tweaks.ily"
+\include "lib/musical_functions.ily"
+\include "lib/embellishments.ily"
+\include "lib/flourishing.ily"
+\include "lib/special_sticking.ily"
+\include "lib/rehearsal_marks.ily"
+\include "lib/midi.ily"

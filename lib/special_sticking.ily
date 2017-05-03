@@ -21,6 +21,14 @@ crossstick	= #(define-music-function (parser location notes) (ly:music?)
 rimshot		= #(define-music-function (parser location notes) (ly:music?)
 				#{
 					\temporary \override Staff.NoteHead.font-size = #1.2
+					%\temporary \override Staff.NoteHead.stencil = #ly:text-interface::print
+					%\temporary \override Staff.NoteHead.text = \markup {
+					%	\combine
+					%		\halign #-0.7 \draw-circle #0.85 #0.2 ##f
+					%		\musicglyph #"noteheads.normal"
+					%}
 					$notes 
+					%\revert Staff.NoteHead.stencil
+					%\revert Staff.NoteHead.text
 					\revert Staff.NoteHead.font-size
 				#})
