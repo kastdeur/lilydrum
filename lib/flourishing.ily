@@ -328,21 +328,19 @@ flourish = #(define-music-function (parser location notes) (ly:music?)
 				\revert Staff.NoteHead.style
 			#})
 
-scoop = ^\markup {
-				\path #.2 #'( (moveto 0 0 )
-							 (lineto 3 1 )
-							 (lineto 6 0 )
-							 )
-			}
-scoopo = #(define-music-function (parser location beg notes) (ly:music? ly:music?)
-			#{
-			%Set spanner from first to last note
-				$beg
-				\startGroup
-				$notes
-				\stopGroup
-			#})
-
+%scoop = ^\markup {
+%				\path #.2 #'( (moveto 0 0 )
+%							 (lineto 3 1 )
+%							 (lineto 6 0 )
+%							 )
+%			}
+scoop = #(define-music-function (music) (ly:music?) 
+	#{
+		<>^"scoop"\startGroup
+		#(allbutlastnote music)
+		<>\stopGroup
+		#(lastnote music)
+	#})
 %---------------------------------------------------%
 % music function definitions
 %---------------------------------------------------%
