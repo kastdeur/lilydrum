@@ -18,6 +18,15 @@ up = ^\markup \center-column {% Arrow-head and line do not line up nicely most o
 				\draw-line #'(0 . -3) % draw stick
 		%}
 	}
+
+rswipe = ^\markup \center-column {
+	\fontsize #5
+	\override #'(thickness . 2 )
+		\combine
+			\draw-line #'(-3 . 0)
+			\arrow-head #X #RIGHT ##f
+}
+
 bfly = ^\markup \center-column { \char ##x221E }
 rblfy = ^\markup \center-column {
 	  \line{
