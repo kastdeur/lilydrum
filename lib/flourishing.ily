@@ -28,7 +28,7 @@ rswipe = ^\markup \center-column {
 }
 
 bfly = ^\markup \center-column { \char ##x221E }
-rblfy = ^\markup \center-column {
+rbfly = ^\markup \center-column {
 	  \line{
 		\combine
 			\arrow-head #X #LEFT ##f

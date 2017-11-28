@@ -1,3 +1,4 @@
+\version "2.19.80"
 
 #(ly:set-option 'point-and-click #f)
 
@@ -78,7 +79,7 @@
 			d^\andrewStop d^\quiggs
 			d^\stop r |
 
-			d^\blfy d^\rblfy
+			d^\bfly d^\rbfly
 			r r |
 		}
     }
