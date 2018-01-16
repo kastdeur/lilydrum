@@ -101,9 +101,17 @@ ofr = #(define-event-function (parser location) () #{ \stopGroup #})
 % TODO: check whether on one note
 tutti = #(define-music-function (music) (ly:music?) 
 	#{
-		\once \override HorizontalBracket.connect-to-neighbor = #'(#t #t)
-		<>\startGroup
-		#(allbutlastnote music)
-		<>\stopGroup
-		#(lastnote music)
+		<<
+			\tag #'tutti {
+					\override HorizontalBracket.connect-to-neighbor = #'(#t #t)
+					<>\startGroup
+					#(skip-of-length (allbutlastnote music))
+					<>\stopGroup
+					#(skip-of-length (lastnote music))
+					\revert HorizontalBracket.connect-to-neighbor
+			}
+			{
+					#music
+			}
+		>>
 	#})
