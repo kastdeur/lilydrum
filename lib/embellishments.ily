@@ -31,11 +31,11 @@ dragg =   \drummode { \drumgrace { d16[ d] } }				% Drag left
 dragddr = \drummode { \drumgrace { g16[\dr g] } } 	% Drag right with start repeat
 draggdr = \drummode { \drumgrace { d16[\dr d] } } 	% Drag left  with start repeat
 
-% Open Drags
-odragd =   \drummode { \drumgrace { g16[ <>^"o" g] } }				% Open Drag right
-odragg =   \drummode { \drumgrace { d16[ <>^"o" d] } }				% Open Drag left
-odragddr = \drummode { \drumgrace { g16[\dr <>^"o" g] } } 	% Open Drag right with start repeat
-odraggdr = \drummode { \drumgrace { d16[\dr <>^"o" d] } } 	% Open Drag left  with start repeat
+% open drags
+odragd =   \drummode { \drumgrace { << { g16[ g] } { s32 s32^\markup { \musicglyph #"scripts.open" } } >> } }				% Open Drag right
+odragg =   \drummode { \drumgrace { << { d16[ d] } { s32 s32^\markup { \musicglyph #"scripts.open" } } >> }	}			% Open Drag left
+odragddr = \drummode { \drumgrace { << { d16[\dr d] } { s32 s32^\markup { \musicglyph #"scripts.open" } } >> } }	% Open Drag right with start repeat
+odraggdr = \drummode { \drumgrace { << { g16[\dr g] } { s32 s32^\markup { \musicglyph #"scripts.open" } } >> } }	% Open Drag left  with start repeat
 
 % Ruff
 ruffg =   \drummode { \drumgrace { g16[ d g] } }				% Ruff right
@@ -64,7 +64,7 @@ sruffddr = \drummode { \drumgrace { d16[\dr g g] } }	% Swiss Ruff left  with sta
 			#{ $right #})
 
 		% print the note, else it won't show up
-		$note
+		#note
 	 #}
 	)
 )
