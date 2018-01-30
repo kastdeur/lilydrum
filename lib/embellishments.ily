@@ -32,10 +32,10 @@ dragddr = \drummode { \drumgrace { g16[\dr g] } } 	% Drag right with start repea
 draggdr = \drummode { \drumgrace { d16[\dr d] } } 	% Drag left  with start repeat
 
 % open drags
-odragd =   \drummode { \drumgrace { << { g16[ g] } { s32 s32^\markup { \musicglyph #"scripts.open" } } >> } }				% Open Drag right
-odragg =   \drummode { \drumgrace { << { d16[ d] } { s32 s32^\markup { \musicglyph #"scripts.open" } } >> }	}			% Open Drag left
-odragddr = \drummode { \drumgrace { << { d16[\dr d] } { s32 s32^\markup { \musicglyph #"scripts.open" } } >> } }	% Open Drag right with start repeat
-odraggdr = \drummode { \drumgrace { << { g16[\dr g] } { s32 s32^\markup { \musicglyph #"scripts.open" } } >> } }	% Open Drag left  with start repeat
+odragd =   \drummode { \drumgrace { << { g16[ g] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }				% Open Drag right
+odragg =   \drummode { \drumgrace { << { d16[ d] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> }	}			% Open Drag left
+odragddr = \drummode { \drumgrace { << { d16[\dr d] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }	% Open Drag right with start repeat
+odraggdr = \drummode { \drumgrace { << { g16[\dr g] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }	% Open Drag left  with start repeat
 
 % Ruff
 ruffg =   \drummode { \drumgrace { g16[ d g] } }				% Ruff right

@@ -29,7 +29,7 @@ sixteenthCompoundBeaming = {
 	\set beatStructure = #'( 6 6 6 6)
 }
 % triplet
-triplet = #(define-music-function (parser location notes) (ly:music?) #{ \tuplet 3/2 { $notes } #})
+triplet = #(define-music-function (parser location music) (ly:music?) #{ \tuplet 3/2 { $music } #})
 
 % dynamics
 v = #(define-event-function (parser location) () #{ \upbow #})
@@ -104,14 +104,14 @@ tutti = #(define-music-function (music) (ly:music?)
 		<<
 			\tag #'tutti {
 					\override HorizontalBracket.connect-to-neighbor = #'(#t #t)
-					<>\startGroup
+					<>\dr
 					#(skip-of-length (allbutlastnote music))
-					<>\stopGroup
+					<>\fr
 					#(skip-of-length (lastnote music))
 					\revert HorizontalBracket.connect-to-neighbor
 			}
 			{
-					#music
+					$music
 			}
 		>>
 	#})
