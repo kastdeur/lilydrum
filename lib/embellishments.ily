@@ -20,32 +20,32 @@ drumgrace = #(define-music-function (parser location notes ) ( ly:music? ) #{
 #})
 
 % Flams
-flamd =   \drummode { \drumgrace { g8 } }					% Flam right
-flamg =   \drummode { \drumgrace { d8 } }					% Flam left
+flamd =   \drummode { \drumgrace { g8 } }			% Flam right
+flamg =   \drummode { \drumgrace { d8 } }			% Flam left
 flamddr = \drummode { \drumgrace { g8\dr } }		% Flam right with start repeat
 flamgdr = \drummode { \drumgrace { d8\dr } }		% Flam left	 with start repeat
 
 % Drags
-dragd =   \drummode { \drumgrace { g16[ g] } }				% Drag right
-dragg =   \drummode { \drumgrace { d16[ d] } }				% Drag left
+dragd =   \drummode { \drumgrace { g16[ g] } }		% Drag right
+dragg =   \drummode { \drumgrace { d16[ d] } }		% Drag left
 dragddr = \drummode { \drumgrace { g16[\dr g] } } 	% Drag right with start repeat
 draggdr = \drummode { \drumgrace { d16[\dr d] } } 	% Drag left  with start repeat
 
 % open drags
-odragd =   \drummode { \drumgrace { << { g16[ g] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }				% Open Drag right
-odragg =   \drummode { \drumgrace { << { d16[ d] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> }	}			% Open Drag left
+odragd =   \drummode { \drumgrace { << { g16[ g] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }		% Open Drag right
+odragg =   \drummode { \drumgrace { << { d16[ d] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> }	}		% Open Drag left
 odragddr = \drummode { \drumgrace { << { d16[\dr d] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }	% Open Drag right with start repeat
 odraggdr = \drummode { \drumgrace { << { g16[\dr g] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }	% Open Drag left  with start repeat
 
 % Ruff
-ruffg =   \drummode { \drumgrace { g16[ d g] } }				% Ruff right
-ruffd =   \drummode { \drumgrace { d16[ g d] } }				% Ruff left
+ruffg =   \drummode { \drumgrace { g16[ d g] } }	% Ruff right
+ruffd =   \drummode { \drumgrace { d16[ g d] } }	% Ruff left
 ruffgdr = \drummode { \drumgrace { g16[\dr d g] } }	% Ruff right with start repeat
 ruffddr = \drummode { \drumgrace { d16[\dr g d] } }	% Ruff left  with start repeat
 
 % Swiss Ruff
-sruffg =   \drummode { \drumgrace { g16[ d d] } }			% Swiss Ruff right
-sruffd =   \drummode { \drumgrace { d16[ g g] } }			% Swiss Ruff left
+sruffg =   \drummode { \drumgrace { g16[ d d] } }		% Swiss Ruff right
+sruffd =   \drummode { \drumgrace { d16[ g g] } }		% Swiss Ruff left
 sruffgdr = \drummode { \drumgrace { g16[\dr d d] } }	% Swiss Ruff right with start repeat
 sruffddr = \drummode { \drumgrace { d16[\dr g g] } }	% Swiss Ruff left  with start repeat
 
@@ -56,9 +56,6 @@ sruffddr = \drummode { \drumgrace { d16[\dr g g] } }	% Swiss Ruff left  with sta
 #(define (autohandFunc left right)
 	(define-music-function (parser location note) (ly:music? )
 	 #{
-		#(newline)
-		#(display "Fix autohand function for arbitrary depth")
-	
 		#(if (string=? (symbol->string (ly:music-property note 'drum-type)) "left-hand")
 			#{ $left #}
 			#{ $right #})
@@ -71,7 +68,7 @@ sruffddr = \drummode { \drumgrace { d16[\dr g g] } }	% Swiss Ruff left  with sta
 
 % Flam
 flam = #(autohandFunc flamg flamd)
-flamdr = #(autohandFunc flamgdr   flamddr )
+flamdr = #(autohandFunc flamgdr flamddr )
 
 % Drag
 drag = #(autohandFunc dragg dragd )

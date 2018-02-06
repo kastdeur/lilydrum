@@ -41,6 +41,7 @@ You can use every regular drum character (such as `sn` or `bd`), as `d` and `g` 
         }
     }
 ```
+(see ./example.ly)
 
 
 ### Embellishments (Side)

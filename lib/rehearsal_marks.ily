@@ -1,8 +1,7 @@
 % =================================================	%
 % 	Rehearsal Marks									%
 % =================================================	%
-#(newline)
-#(display "Rehearsal Marks loaded")
+
 % From Svenax's bagpipemusic
 markText = #(define-music-function (parser location text) (string?) #{
     \once \override Score.RehearsalMark #'self-alignment-X = #LEFT
@@ -28,5 +27,6 @@ altBracket = #(define-music-function (parser location tag) (string?) #{
 
 
 % Short al fine's and stuff
-dacapoalfine = {\markTextEol "D.C. al fine" }
+dcalfine = {\markTextEol "D.C. al Fine" }
+dacapoalfine = {\markTextEol "Da Capo al Fine" }
 fine = {\markTextEol "Fine" }

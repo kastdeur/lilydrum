@@ -1,8 +1,6 @@
 % ===================================================	%
-% 	Layout tweaks for good defaults						%
+% 	Layout to define the PipeBandDrumStaff				%
 % ===================================================	%
-#(newline)
-#(display "Layout tweaks loaded")
 % Note name defs :
 %	"d" for the right hand ("droite") and
 %	"g" for the left hand ("gauche")
@@ -29,6 +27,7 @@ drumPitchNames =
 		\name PipeBandDrumStaff
 		\alias DrumStaff
 		
+		% The above style definitions are loaded
 		drumStyleTable = #(alist->hash-table pipeband-style)
 
 		% one line per staff
@@ -98,10 +97,6 @@ drumPitchNames =
 	\context {
 		\Score
 		\accepts "PipeBandDrumStaff"
-
-		\override RehearsalMark.break-align-symbols = #'(clef)
-		\override RehearsalMark.padding = #3
-		\override VoltaBracket.edge-height = #'(1.5 . 1.5)
 	}
 	\context {
 		\StaffGroup

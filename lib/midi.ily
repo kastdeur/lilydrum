@@ -1,7 +1,5 @@
 % Add standard midi support, preferably able to 
 % switch instruments for different staves 
-#(newline)
-#(display "Midi Support loaded")
 
 bassPitchOne		= #(ly:make-pitch -2 0 NATURAL)
 bassPitchTwo		= #(ly:make-pitch -3 6 NATURAL)

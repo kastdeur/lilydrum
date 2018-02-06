@@ -8,16 +8,13 @@
 %---------------------------------------------------%
 splitTheFeather = ^\markup \center-column { \musicglyph #"noteheads.s2xcircle"}
 cartWheel = ^\markup \center-column { \musicglyph #"timesig.neomensural94" }
-up = ^\markup \center-column {% Arrow-head and line do not line up nicely most of the time
+up = ^\markup \center-column {
 			\fontsize #5
 			\override #'(thickness . 2)
-	%\center-column {
 			\combine
-%				\musicglyph #"arrowheads.open.11"
 				\arrow-head #Y #UP ##f
 				\draw-line #'(0 . -3) % draw stick
-		%}
-	}
+}
 
 rswipe = ^\markup \center-column {
 	\fontsize #5
@@ -337,12 +334,7 @@ flourish = #(define-music-function (parser location notes) (ly:music?)
 				\revert Staff.NoteHead.style
 			#})
 
-%scoop = ^\markup {
-%				\path #.2 #'( (moveto 0 0 )
-%							 (lineto 3 1 )
-%							 (lineto 6 0 )
-%							 )
-%			}
+% See issue #4 (https://github.com/kastdeur/lilydrum/issues/4)
 scoop = #(define-music-function (music) (ly:music?) 
 	#{
 		<>^"scoop"\startGroup
