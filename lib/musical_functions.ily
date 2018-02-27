@@ -37,8 +37,8 @@ v = #(define-event-function (parser location) () #{ \upbow #})
 
 #(define (text-spanner-start-stop mus)
 	(let ((elts (ly:music-property mus 'elements)))
-	(make-music 'SequentialMusic 'elements 
-		(append	
+	(make-music 'SequentialMusic 'elements
+		(append
 			(list (make-music 'TextSpanEvent 'span-direction -1))
 			(reverse (cdr (reverse elts)))
 			(list (make-music 'TextSpanEvent 'span-direction 1))
@@ -83,10 +83,10 @@ dynLine = #(define-music-function
 %fr = { <>\="unison"\stopTextSpan }
 %odr = { \unisonbracket	<>\="unison"\startTextSpan }
 %ofr = { <>\="unison"\stopTextSpan }
-dr = #(define-event-function (parser location) () #{ \startGroup #})
-fr = #(define-event-function (parser location) () #{ \stopGroup #})
-odr = #(define-event-function (parser location) () #{ \startGroup #})
-ofr = #(define-event-function (parser location) () #{ \stopGroup #})
+dr = #(define-event-function (parser location) () #{ -\tag #'tutti \startGroup #})
+fr = #(define-event-function (parser location) () #{ -\tag #'tutti \stopGroup #})
+odr = #(define-event-function (parser location) () #{ -\tag #'tutti \startGroup #})
+ofr = #(define-event-function (parser location) () #{ -\tag #'tutti \stopGroup #})
 
 #(define (allbutlastnote mus)
 	(let ((elts (ly:music-property mus 'elements)))
@@ -99,19 +99,12 @@ ofr = #(define-event-function (parser location) () #{ \stopGroup #})
 	)
 )
 % TODO: check whether on one note
-tutti = #(define-music-function (music) (ly:music?) 
+tutti = #(define-music-function (music) (ly:music?)
 	#{
-		<<
-			\tag #'tutti {
-					\override HorizontalBracket.connect-to-neighbor = #'(#t #t)
-					<>\dr
-					#(skip-of-length (allbutlastnote music))
-					<>\fr
-					#(skip-of-length (lastnote music))
-					\revert HorizontalBracket.connect-to-neighbor
-			}
-			{
-					$music
-			}
-		>>
+		\override HorizontalBracket.connect-to-neighbor = #'(#t #t)
+		<>\dr
+		#(allbutlastnote music)
+		<>\fr
+		#(lastnote music)
+		\revert HorizontalBracket.connect-to-neighbor
 	#})
