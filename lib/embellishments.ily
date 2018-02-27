@@ -11,7 +11,7 @@ drumgrace = #(define-music-function (parser location notes ) ( ly:music? ) #{
 	\override Score.Stem #'beamlet-max-length-proportion = #'(0.5 . 0.5)
 
 	% Print notes
-	\small \grace $notes
+	\small \times 1/4 { \grace $notes }
 
 	% Revert back
 	\revert Score.Stem #'beamlet-default-length
