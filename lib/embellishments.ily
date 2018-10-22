@@ -53,19 +53,29 @@ sruffddr = \drummode { \drumgrace { d16[\dr g g] } }	% Swiss Ruff left  with sta
 %%	Embellishment functions, automatic left or right	%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-#(define (autohandFunc left right)
-	(define-music-function (parser location note) (ly:music? )
-	 #{
-		#(if (string=? (symbol->string (ly:music-property note 'drum-type)) "left-hand")
-			#{ $left #}
-			#{ $right #})
-
-		% print the note, else it won't show up
-		#note
-	 #}
-	)
+get-first-note = #(define-music-function (music) (ly:music?)
+	"Get the first note-event in @var{music}"
+	(let ((note(car (extract-typed-music music 'note-event))))
+	  note
+	  )
 )
 
+#(define (autohandFunc left right)
+	"Return a music function that prepends @var{left} if the first next note-event is of type 'left-hand,
+else it will prepend @var{right}"
+	(define-music-function (parser location music) (ly:music? )
+		(let ((note (get-first-note music)))
+			#{
+				#(if (string=? (symbol->string (ly:music-property note 'drum-type)) "left-hand")
+					#{ $left #}
+					#{ $right #})
+
+				% print the note, else it won't show up
+				#music
+			 #}
+		 )
+	)
+)
 % Flam
 flam = #(autohandFunc flamg flamd)
 flamdr = #(autohandFunc flamgdr flamddr )

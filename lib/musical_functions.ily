@@ -89,11 +89,13 @@ odr = #(define-event-function (parser location) () #{ -\tag #'tutti \startGroup 
 ofr = #(define-event-function (parser location) () #{ -\tag #'tutti \stopGroup #})
 
 #(define (allbutlastnote mus)
+   "Reverse the elements, Pop of (cdr) the first element, Reverse again, put it in a SequentialMusic"
 	(let ((elts (ly:music-property mus 'elements)))
 		(make-music 'SequentialMusic 'elements (reverse (cdr (reverse elts))))
 	)
 )
 #(define (lastnote mus)
+   "Get the last element, make it a list, put it in a SequentialMusic"
 	(let ((elts (ly:music-property mus 'elements)))
 		(make-music 'SequentialMusic 'elements (list (last elts)))
 	)
