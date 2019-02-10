@@ -4,7 +4,7 @@
 
 % Choose a size
 #(set-global-staff-size 18)
-#(set-default-paper-size "a4" 'landscape)
+#(set-default-paper-size "a4landscape")
 
 \paper {
   indent = 0\mm
@@ -157,5 +157,4 @@
 \header {
     title = "Cheat sheet for entering pipeband drumming music"
     subtitle = "Intended for Lilypond 2.18 or better"
-    tagline = \markup { "D/Cpl ET de Boone, Seaforths of Holland" }
 }
