@@ -55,7 +55,7 @@ sruffddr = \drummode { \drumgrace { d16[\dr g g] } }	% Swiss Ruff left  with sta
 
 get-first-note = #(define-music-function (music) (ly:music?)
 	"Get the first note-event in @var{music}"
-	(let ((note(car (extract-typed-music music 'note-event))))
+	(let ((note (car (extract-typed-music music 'note-event))))
 	  note
 	  )
 )
