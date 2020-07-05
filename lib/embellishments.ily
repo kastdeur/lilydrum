@@ -1,6 +1,7 @@
-% =================================================	%
-% 	Flams, Drags & the sort							%
-% =================================================	%
+% ================================================= %
+%   Flams, Drags & the sort                         %
+% ================================================= %
+
 drumgrace = #(define-music-function (parser location notes ) ( ly:music? ) #{
 	% Set settings
 	\stemUp
@@ -23,7 +24,13 @@ drumgrace = #(define-music-function (parser location notes ) ( ly:music? ) #{
 flamd =   \drummode { \drumgrace { g8 } }			% Flam right
 flamg =   \drummode { \drumgrace { d8 } }			% Flam left
 flamddr = \drummode { \drumgrace { g8\dr } }		% Flam right with start repeat
-flamgdr = \drummode { \drumgrace { d8\dr } }		% Flam left	 with start repeat
+flamgdr = \drummode { \drumgrace { d8\dr } }		% Flam left  with start repeat
+
+% Optional Flams
+optflamd =   \drummode { \drumgrace { \parenthesize g8 } }			% Optional Flam right
+optflamg =   \drummode { \drumgrace { \parenthesize d8 } }			% Optional Flam left
+optflamddr = \drummode { \drumgrace { \parenthesize g8\dr } }		% Optional Flam right with start repeat
+optflamgdr = \drummode { \drumgrace { \parenthesize d8\dr } }		% Optional Flam left  with start repeat
 
 % Drags
 dragd =   \drummode { \drumgrace { g16[ g] } }		% Drag right
@@ -31,7 +38,7 @@ dragg =   \drummode { \drumgrace { d16[ d] } }		% Drag left
 dragddr = \drummode { \drumgrace { g16[\dr g] } } 	% Drag right with start repeat
 draggdr = \drummode { \drumgrace { d16[\dr d] } } 	% Drag left  with start repeat
 
-% open drags
+% Open Drags
 odragd =   \drummode { \drumgrace { << { g16[ g] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }		% Open Drag right
 odragg =   \drummode { \drumgrace { << { d16[ d] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> }	}		% Open Drag left
 odragddr = \drummode { \drumgrace { << { d16[\dr d] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }	% Open Drag right with start repeat
@@ -50,7 +57,7 @@ sruffgdr = \drummode { \drumgrace { g16[\dr d d] } }	% Swiss Ruff right with sta
 sruffddr = \drummode { \drumgrace { d16[\dr g g] } }	% Swiss Ruff left  with start repeat
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%	Embellishment functions, automatic left or right	%%
+%%  Embellishment functions, automatic left or right    %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 get-first-note = #(define-music-function (music) (ly:music?)
@@ -76,9 +83,14 @@ else it will prepend @var{right}"
 		 )
 	)
 )
+
 % Flam
 flam = #(autohandFunc flamg flamd)
 flamdr = #(autohandFunc flamgdr flamddr )
+
+% Optional Flam
+optflam = #(autohandFunc optflamg optflamd)
+optflamdr = #(autohandFunc optflamgdr optflamddr )
 
 % Drag
 drag = #(autohandFunc dragg dragd )
