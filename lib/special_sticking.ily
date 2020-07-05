@@ -1,30 +1,33 @@
-% =================================================	%
-% 	Side Sticking (modifies note, or adds mark)		%
-% =================================================	%
+% ================================================= %
+%   Side Sticking (modifies note, or adds mark)     %
+% ================================================= %
 % Part of lilydrum
-backstick	= #(define-music-function (parser location notes) (ly:music?)
-				#{
-					\temporary \override Staff.NoteHead.style = #'triangle
-					\temporary \override Staff.NoteHead.font-size = #1.2
-					#notes 
-					\revert Staff.NoteHead.font-size
-					\revert Staff.NoteHead.style
-				#})
-crossstick	= #(define-music-function (parser location notes) (ly:music?)
-				#{
-					\temporary \override Staff.NoteHead.style = #'xcircle
-					\temporary \override Staff.NoteHead.font-size = #1.2
-					#notes 
-					\revert Staff.NoteHead.font-size
-					\revert Staff.NoteHead.style
-				#})
-rimshot		= #(define-music-function (parser location notes) (ly:music?)
-				#{
-					\temporary \override Staff.NoteHead.font-size = #1.2
-					\temporary \override Staff.NoteHead.stencil = #ly:text-interface::print
-					\temporary \override Staff.NoteHead.text = \markup { \musicglyph #"scripts.halfopen" }
-					#notes 
-					\revert Staff.NoteHead.stencil
-					\revert Staff.NoteHead.text
-					\revert Staff.NoteHead.font-size
-				#})
+
+backstick = #(define-music-function (parser location notes) (ly:music?)
+#{
+		\temporary \override Voice.NoteHead.style = #'triangle
+		\temporary \override Voice.NoteHead.font-size = #1.2
+		#notes
+		\revert Voice.NoteHead.font-size
+		\revert Voice.NoteHead.style
+#})
+
+crossstick = #(define-music-function (parser location notes) (ly:music?)
+#{
+		\temporary \override Voice.NoteHead.style = #'xcircle
+		\temporary \override Voice.NoteHead.font-size = #1.2
+		#notes
+		\revert Voice.NoteHead.font-size
+		\revert Voice.NoteHead.style
+#})
+
+rimshot = #(define-music-function (parser location notes) (ly:music?)
+#{
+		\temporary \override Voice.NoteHead.font-size = #1.2
+		\temporary \override Voice.NoteHead.stencil = #ly:text-interface::print
+		\temporary \override Voice.NoteHead.text = \markup { \musicglyph #"scripts.halfopen" }
+		#notes
+		\revert Voice.NoteHead.stencil
+		\revert Voice.NoteHead.text
+		\revert Voice.NoteHead.font-size
+#})
