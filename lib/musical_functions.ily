@@ -30,6 +30,8 @@ sixteenthCompoundBeaming = {
 }
 % triplet
 triplet = #(define-music-function (parser location music) (ly:music?) #{ \tuplet 3/2 { $music } #})
+quintuplet = #(define-music-function (parser location music) (ly:music?) #{ \tuplet 5/2 { $music } #})
+sextuplet = #(define-music-function (parser location music) (ly:music?) #{ \tuplet 6/4 { $music } #})
 
 % dynamics
 v = #(define-event-function (parser location) () #{ \upbow #})
