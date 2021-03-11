@@ -70,7 +70,7 @@
 					\repeat unfold 2 {
 						d8:32( |
 						\tuplet 3/2 { g8) d g } \flam d8		\tuplet 3/2 { d8 g d } \flam g8 |
-						d16 g d-> g d g  \flam d8 g8. d16 |
+						d16 g d-> g d g  \flam d8. g16 d8 |
 
 					} \alternative {
 						% We don't actually need the outermost braces of the alternatives used in the first line
