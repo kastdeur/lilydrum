@@ -89,6 +89,7 @@ dr = #(define-event-function (parser location) () #{ -\tag #'tutti \startGroup #
 fr = #(define-event-function (parser location) () #{ -\tag #'tutti \stopGroup #})
 odr = #(define-event-function (parser location) () #{ -\tag #'tutti \startGroup #})
 ofr = #(define-event-function (parser location) () #{ -\tag #'tutti \stopGroup #})
+rn = #(define-event-function (parser location) () #{ -\tag #'tutti ^\markup \path #0.1 #'((moveto 0 0)(rlineto 0 1)(rlineto 4 0)(rlineto 0 -1)) #})
 
 #(define (allbutlastnote mus)
    "Reverse the elements, Pop of (cdr) the first element, Reverse again, put it in a SequentialMusic"
@@ -102,13 +103,30 @@ ofr = #(define-event-function (parser location) () #{ -\tag #'tutti \stopGroup #
 		(make-music 'SequentialMusic 'elements (list (last elts)))
 	)
 )
-% TODO: check whether on one note
-tutti = #(define-music-function (music) (ly:music?)
-	#{
-		\override HorizontalBracket.connect-to-neighbor = #'(#t #t)
-		<>\dr
-		#(allbutlastnote music)
-		<>\fr
-		#(lastnote music)
-		\revert HorizontalBracket.connect-to-neighbor
-	#})
+tutti =
+#(define-music-function (myMusic) (ly:music?)
+	(define (grace-music-filter event)
+		(let ((eventname (ly:music-property event 'name)))
+		(not (eq? eventname 'GraceMusic))))
+	(let*
+		(
+			(music-copy (ly:music-deep-copy myMusic))
+			(es (extract-typed-music (music-filter grace-music-filter music-copy) 'note-event))
+		)
+		(if (> (length es) 1)
+			#{% multiple notes
+				\once \override HorizontalBracket.to-barline = ##t
+				\override HorizontalBracket.connect-to-neighbor = #'(#t #t)
+				<>\dr
+				#(allbutlastnote myMusic)
+				<>\fr
+				#(lastnote myMusic)
+				\revert HorizontalBracket.connect-to-neighbor
+			#}
+			#{% single note
+				<>\rn
+				#myMusic
+			#}
+		)
+	)
+)
