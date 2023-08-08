@@ -8,8 +8,8 @@ drumgrace = #(define-music-function (parser location notes ) ( ly:music? ) #{
 	\once \override Beam.positions = #'(2 . 2)
 	\once \override DrumStaff.Stem.length = #5
 	\override Flag.stroke-style = #"grace"
-	\override Score.GraceSpacing #'spacing-increment = #0
-	\override Score.Stem #'beamlet-max-length-proportion = #'(0.5 . 0.5)
+	\override Score.GraceSpacing.spacing-increment = #0
+	\override Score.Stem.beamlet-max-length-proportion = #'(0.5 . 0.5)
 
 	% Print notes
 	% Grace note timing is scaled, so they do not wander off too
@@ -18,7 +18,7 @@ drumgrace = #(define-music-function (parser location notes ) ( ly:music? ) #{
 	\times 1/4 { \grace $notes }
 
 	% Revert back
-	\revert Score.Stem #'beamlet-default-length
+	\revert Score.Stem.beamlet-default-length
 	\revert Flag.stroke-style
 	\stemNeutral
 #})
