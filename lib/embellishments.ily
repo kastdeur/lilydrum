@@ -48,10 +48,10 @@ odragddr = \drummode { \drumgrace { << { d16[\dr d] } { s16 s32^\markup { \music
 odraggdr = \drummode { \drumgrace { << { g16[\dr g] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }	% Open Drag left  with start repeat
 
 % Ruff
-ruffg =   \drummode { \drumgrace { g16[ d g] } }	% Ruff right
-ruffd =   \drummode { \drumgrace { d16[ g d] } }	% Ruff left
-ruffgdr = \drummode { \drumgrace { g16[\dr d g] } }	% Ruff right with start repeat
-ruffddr = \drummode { \drumgrace { d16[\dr g d] } }	% Ruff left  with start repeat
+ruffg =   \drummode { \drumgrace { d16[ g d] } }	% Ruff right
+ruffd =   \drummode { \drumgrace { g16[ d g] } }	% Ruff left
+ruffgdr = \drummode { \drumgrace { d16[\dr g d] } }	% Ruff right with start repeat
+ruffddr = \drummode { \drumgrace { g16[\dr d g] } }	% Ruff left  with start repeat
 
 % Swiss Ruff
 sruffg =   \drummode { \drumgrace { g16[ d d] } }		% Swiss Ruff right
