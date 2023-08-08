@@ -91,18 +91,6 @@ odr = #(define-event-function (parser location) () #{ -\tag #'tutti \startGroup 
 ofr = #(define-event-function (parser location) () #{ -\tag #'tutti \stopGroup #})
 rn = #(define-event-function (parser location) () #{ -\tag #'tutti ^\markup \path #0.1 #'((moveto 0 0)(rlineto 0 1)(rlineto 4 0)(rlineto 0 -1)) #})
 
-#(define (allbutlastnote mus)
-   "Reverse the elements, Pop of (cdr) the first element, Reverse again, put it in a SequentialMusic"
-	(let ((elts (ly:music-property mus 'elements)))
-		(make-music 'SequentialMusic 'elements (reverse (cdr (reverse elts))))
-	)
-)
-#(define (lastnote mus)
-   "Get the last element, make it a list, put it in a SequentialMusic"
-	(let ((elts (ly:music-property mus 'elements)))
-		(make-music 'SequentialMusic 'elements (list (last elts)))
-	)
-)
 tutti =
 #(define-music-function (myMusic) (ly:music?)
 	(define (grace-music-filter event)

@@ -338,9 +338,9 @@ flourish = #(define-music-function (parser location notes) (ly:music?)
 scoop = #(define-music-function (music) (ly:music?) 
 	#{
 		<>^"scoop"\startGroup
-		#(allbutlastnote music)
+		#(_allbutlastnote music)
 		<>\stopGroup
-		#(lastnote music)
+		#(_lastnote music)
 	#})
 %---------------------------------------------------%
 % music function definitions

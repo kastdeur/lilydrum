@@ -42,10 +42,10 @@ dragddr = \drummode { \drumgrace { g16[\dr g] } } 	% Drag right with start repea
 draggdr = \drummode { \drumgrace { d16[\dr d] } } 	% Drag left  with start repeat
 
 % Open Drags
-odragd =   \drummode { \drumgrace { << { g16[ g] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }		% Open Drag right
-odragg =   \drummode { \drumgrace { << { d16[ d] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> }	}		% Open Drag left
-odragddr = \drummode { \drumgrace { << { d16[\dr d] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }	% Open Drag right with start repeat
-odraggdr = \drummode { \drumgrace { << { g16[\dr g] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }	% Open Drag left  with start repeat
+odragd =   \drummode { \drumgrace { << { g16[ g] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }          % Open Drag right
+odragg =   \drummode { \drumgrace { << { d16[ d] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> }    }               % Open Drag left
+odragddr = \drummode { \drumgrace { << { d16[\dr d] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }       % Open Drag right with start repeat
+odraggdr = \drummode { \drumgrace { << { g16[\dr g] } { s16 s32^\markup { \musicglyph #"scripts.open" } } >> } }       % Open Drag left  with start repeat
 
 % Ruff
 ruffg =   \drummode { \drumgrace { d16[ g d] } }	% Ruff right
@@ -63,18 +63,12 @@ sruffddr = \drummode { \drumgrace { d16[\dr g g] } }	% Swiss Ruff left  with sta
 %%  Embellishment functions, automatic left or right    %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-get-first-note = #(define-music-function (music) (ly:music?)
-	"Get the first note-event in @var{music}"
-	(let ((note (car (extract-typed-music music 'note-event))))
-	  note
-	  )
-)
 
 #(define (autohandFunc left right)
 	"Return a music function that prepends @var{left} if the first next note-event is of type 'left-hand,
 else it will prepend @var{right}"
 	(define-music-function (parser location music) (ly:music? )
-		(let ((note (get-first-note music)))
+		(let ((note (_get-first-note music)))
 			#{
 				#(if (string=? (symbol->string (ly:music-property note 'drum-type)) "left-hand")
 					#{ $left #}
@@ -98,6 +92,7 @@ optflamdr = #(autohandFunc optflamgdr optflamddr )
 % Drag
 drag = #(autohandFunc dragg dragd )
 dragdr = #(autohandFunc draggdr dragddr )
+
 % Open Drag
 odrag = #(autohandFunc odragg odragd )
 odragdr = #(autohandFunc odraggdr odragddr )
