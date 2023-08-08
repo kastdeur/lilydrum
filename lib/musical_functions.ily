@@ -115,13 +115,10 @@ tutti =
 		)
 		(if (> (length es) 1)
 			#{% multiple notes
-				\once \override HorizontalBracket.to-barline = ##t
-				\override HorizontalBracket.connect-to-neighbor = #'(#t #t)
+				\once \override HorizontalBracket.connect-to-neighbor = #'(#t #t)
 				<>\dr
-				#(allbutlastnote myMusic)
-				<>\fr
-				#(lastnote myMusic)
-				\revert HorizontalBracket.connect-to-neighbor
+				#myMusic
+				\fr
 			#}
 			#{% single note
 				<>\rn

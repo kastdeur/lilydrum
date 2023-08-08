@@ -74,6 +74,8 @@ drumPitchNames =
 		\override HorizontalBracket.staff-padding = #3.5		% staff-padding
 		\override HorizontalBracket.direction = #UP			% brackets above the staff
 		\override HorizontalBracket.bracket-flare = #'(0 . 0)	% vertical brackets
+		\override HorizontalBracket.outside-staff-priority = #100
+		\override HorizontalBracket.to-barline = ##t
 
 		subdivideBeams = ##t
 		strictBeatBeaming = ##t
