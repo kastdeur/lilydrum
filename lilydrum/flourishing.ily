@@ -335,13 +335,26 @@ flourish = #(define-music-function (parser location notes) (ly:music?)
 			#})
 
 % See issue #4 (https://github.com/kastdeur/lilydrum/issues/4)
-scoop = #(define-music-function (music) (ly:music?) 
-	#{
-		<>^"scoop"\startGroup
-		#(_allbutlastnote music)
-		<>\stopGroup
-		#(_lastnote music)
-	#})
+scoop = #(define-music-function (music) (ly:music?)
+	(define (grace-music-filter event)
+		(let ((eventname (ly:music-property event 'name)))
+			(not (eq? eventname 'GraceMusic))))
+	(let*
+		(
+			(music-copy (ly:music-deep-copy music))
+			(es (extract-typed-music (music-filter grace-music-filter music-copy) 'note-event))
+		)
+		(if (< (length es) 2)
+			 (ly:message "A scoop requires at least two notes for positioning"))
+		; do it anyway
+		#{
+			<>
+			-\tweak HorizontalBracketText.text "scoop"
+			-\tweak HorizontalBracketText.whiteout 1
+			\startGroup
+			#music
+			\stopGroup
+		#}))
 %---------------------------------------------------%
 % music function definitions
 %---------------------------------------------------%

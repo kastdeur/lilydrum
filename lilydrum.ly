@@ -6,7 +6,7 @@
 
 	This file builds on work done by Simon Froger.
 
-	Substantial changes by ET de Boone, Seaforth Highlanders of Holland (seaforth.nl)
+	Substantial changes by ET de Boone (https://etdeboone.nl)
 	Include by using :
 	\include "[pathtothisfile]" e.g. "~/lilydrum.ly"
 
@@ -25,8 +25,6 @@
 %-----------------------------------------
 
 #(ly:set-option 'relative-includes #t)
-
-\include "lilydrum/internal_functions.ily"
 
 \include "lilydrum/layout_tweaks.ily"
 \include "lilydrum/musical_functions.ily"

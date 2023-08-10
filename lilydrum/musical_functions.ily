@@ -103,8 +103,8 @@ tutti =
 		)
 		(if (> (length es) 1)
 			#{% multiple notes
-				\once \override HorizontalBracket.connect-to-neighbor = #'(#t #t)
-				<>\dr
+				<>
+				\dr
 				#myMusic
 				\fr
 			#}
